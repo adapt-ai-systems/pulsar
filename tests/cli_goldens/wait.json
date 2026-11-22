@@ -1,0 +1,3903 @@
+{
+ "cmd": {
+  "argv": [
+   "cmd",
+   "test -f /tmp/x"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd test -f /tmp/x",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "test -f /tmp/x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command fails (non-zero). End your turn now.\n"
+ },
+ "cmd-long-note-cut-at-120": {
+  "argv": [
+   "cmd",
+   "echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command fails (non-zero). End your turn now.\n"
+ },
+ "cmd-long-note-cut-at-120-ok": {
+  "argv": [
+   "cmd",
+   "echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "--ok"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --ok",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "invert": true
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command exits 0. End your turn now.\n"
+ },
+ "cmd-missing": {
+  "argv": [
+   "cmd"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait cmd '<shell>' [--ok]\n",
+  "stdout": ""
+ },
+ "cmd-no-id": {
+  "argv": [
+   "cmd",
+   "true"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "cmd-note-cut-mid-character": {
+  "argv": [
+   "cmd",
+   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u00e9tail"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\udcc3",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\u00e9tail"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command fails (non-zero). End your turn now.\n"
+ },
+ "cmd-ok": {
+  "argv": [
+   "cmd",
+   "test -f /tmp/x",
+   "--ok"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd test -f /tmp/x --ok",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "test -f /tmp/x",
+      "invert": true
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command exits 0. End your turn now.\n"
+ },
+ "cmd-timeout": {
+  "argv": [
+   "cmd",
+   "true",
+   "--timeout",
+   "10"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd true",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "true",
+      "timeout_s": 10
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command fails (non-zero). End your turn now.\n"
+ },
+ "cmd-trailing-newline-in-command": {
+  "argv": [
+   "cmd",
+   "echo hi\n\n"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "cmd",
+     "mode": "once",
+     "note": "pulsar-wait: cmd echo hi",
+     "pulse_id": "envid",
+     "spec": {
+      "cmd": "echo hi\n\n"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the command fails (non-zero). End your turn now.\n"
+ },
+ "cmd-two-positionals": {
+  "argv": [
+   "cmd",
+   "true",
+   "false"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown flag 'false'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "cmd-unknown-flag": {
+  "argv": [
+   "cmd",
+   "true",
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown flag '--wat'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "empty-pulse-flag-falls-to-cwd": {
+  "argv": [
+   "--pulse",
+   "",
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "pulse",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "pid123abc",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "empty-pulse-flag-no-id": {
+  "argv": [
+   "--pulse",
+   "",
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "every-missing-value": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--every"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "--every needs seconds\n",
+  "stdout": ""
+ },
+ "every-not-a-number-posts-empty-body": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--every",
+   "abc"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file": {
+  "argv": [
+   "file",
+   "/tmp/done.flag"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/done.flag",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/done.flag"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/done.flag appears. End your turn now.\n"
+ },
+ "file-all-common-options": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--edge",
+   "--every",
+   "45",
+   "--note",
+   "my note"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "interval_seconds": 45,
+     "kind": "file",
+     "mode": "edge",
+     "note": "my note",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-empty-note-falls-back": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--note",
+   ""
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-env-beats-cwd": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "pulse",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-extra-arg": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "more"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown arg 'more'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "file-id-from-cwd": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "pid123abc",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-id-from-nested-cwd": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "nested",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "sub",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-id-from-symlink-cwd": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "link",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "linked",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-idle-sets-edge": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--idle"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "edge",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-max-ctx-ignored": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--max-ctx",
+   "abc"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-missing-path": {
+  "argv": [
+   "file"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait file <path>\n",
+  "stdout": ""
+ },
+ "file-no-id": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "file-options-first": {
+  "argv": [
+   "file",
+   "--note",
+   "n",
+   "--every",
+   "30",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "interval_seconds": 30,
+     "kind": "file",
+     "mode": "once",
+     "note": "n",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-timeout-ignored": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--timeout",
+   "abc"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "file-unicode-path": {
+  "argv": [
+   "file",
+   "/tmp/caf\u00e9 \"q\" $x"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/caf\u00e9 \"q\" $x",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/caf\u00e9 \"q\" $x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/caf\u00e9 \"q\" $x appears. End your turn now.\n"
+ },
+ "help-flag": {
+  "argv": [
+   "--help"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "help-short": {
+  "argv": [
+   "-h"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "help-word": {
+  "argv": [
+   "help"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "http": {
+  "argv": [
+   "http",
+   "http://localhost:8726/health"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "http",
+     "mode": "once",
+     "note": "pulsar-wait: http http://localhost:8726/health",
+     "pulse_id": "envid",
+     "spec": {
+      "url": "http://localhost:8726/health"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://localhost:8726/health fails or misses 'its text'. End your turn now.\n"
+ },
+ "http-contains": {
+  "argv": [
+   "http",
+   "http://x",
+   "--contains",
+   "ok"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "http",
+     "mode": "once",
+     "note": "pulsar-wait: http http://x --contains ok",
+     "pulse_id": "envid",
+     "spec": {
+      "contains": "ok",
+      "url": "http://x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://x fails or misses 'ok'. End your turn now.\n"
+ },
+ "http-contains-missing-value": {
+  "argv": [
+   "http",
+   "http://x",
+   "--contains"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "--contains needs a value\n",
+  "stdout": ""
+ },
+ "http-empty-contains": {
+  "argv": [
+   "http",
+   "http://x",
+   "--contains",
+   ""
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "http",
+     "mode": "once",
+     "note": "pulsar-wait: http http://x",
+     "pulse_id": "envid",
+     "spec": {
+      "url": "http://x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://x fails or misses 'its text'. End your turn now.\n"
+ },
+ "http-missing-url": {
+  "argv": [
+   "http"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait http <url> [--contains S] [--up]\n",
+  "stdout": ""
+ },
+ "http-no-id": {
+  "argv": [
+   "http",
+   "http://x"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "http-second-positional-unknown": {
+  "argv": [
+   "http",
+   "http://x",
+   "y"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown flag 'y'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "http-timeout": {
+  "argv": [
+   "http",
+   "http://x",
+   "--timeout",
+   "5",
+   "--every",
+   "30"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "interval_seconds": 30,
+     "kind": "http",
+     "mode": "once",
+     "note": "pulsar-wait: http http://x",
+     "pulse_id": "envid",
+     "spec": {
+      "timeout_s": 5,
+      "url": "http://x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://x fails or misses 'its text'. End your turn now.\n"
+ },
+ "http-unknown-flag": {
+  "argv": [
+   "http",
+   "http://x",
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown flag '--wat'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "http-up": {
+  "argv": [
+   "http",
+   "http://x",
+   "--up"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "http",
+     "mode": "once",
+     "note": "pulsar-wait: http http://x --up",
+     "pulse_id": "envid",
+     "spec": {
+      "invert": true,
+      "url": "http://x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://x answers (2xx). End your turn now.\n"
+ },
+ "http-up-contains": {
+  "argv": [
+   "http",
+   "http://x",
+   "--up",
+   "--contains",
+   "ok"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "http",
+     "mode": "once",
+     "note": "pulsar-wait: http http://x --contains ok --up",
+     "pulse_id": "envid",
+     "spec": {
+      "contains": "ok",
+      "invert": true,
+      "url": "http://x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://x answers (2xx, containing 'ok'). End your turn now.\n"
+ },
+ "in-bad-bare": {
+  "argv": [
+   "in",
+   "5x"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: bad duration '5x' (want e.g. 90s, 10m, 2h)\n",
+  "stdout": ""
+ },
+ "in-bad-duration": {
+  "argv": [
+   "in",
+   "soon"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: bad duration 'soon' (want e.g. 90s, 10m, 2h)\n",
+  "stdout": ""
+ },
+ "in-bad-seconds-suffix": {
+  "argv": [
+   "in",
+   "abcs"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: bad duration 'abcs' (want e.g. 90s, 10m, 2h)\n",
+  "stdout": ""
+ },
+ "in-bare-number": {
+  "argv": [
+   "in",
+   "45"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] pulsar-wait reminder"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: pulsar-wait reminder (at <TS>Z). End your turn now.\n"
+ },
+ "in-empty-note-is-default": {
+  "argv": [
+   "in",
+   "5m",
+   ""
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] pulsar-wait reminder"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: pulsar-wait reminder (at <TS>Z). End your turn now.\n"
+ },
+ "in-hours": {
+  "argv": [
+   "in",
+   "2h"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] pulsar-wait reminder"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: pulsar-wait reminder (at <TS>Z). End your turn now.\n"
+ },
+ "in-id-from-cwd": {
+  "argv": [
+   "in",
+   "1m"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] pulsar-wait reminder"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/pid123abc/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: pulsar-wait reminder (at <TS>Z). End your turn now.\n"
+ },
+ "in-minutes": {
+  "argv": [
+   "in",
+   "10m",
+   "check the gate"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] check the gate"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: check the gate (at <TS>Z). End your turn now.\n"
+ },
+ "in-negative": {
+  "argv": [
+   "in",
+   "-5"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: bad duration '-5' (want e.g. 90s, 10m, 2h)\n",
+  "stdout": ""
+ },
+ "in-no-args": {
+  "argv": [
+   "in"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait in <N>[s|m|h] [note]\n",
+  "stdout": ""
+ },
+ "in-no-id": {
+  "argv": [
+   "in",
+   "5m"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "in-note-looks-like-flag": {
+  "argv": [
+   "in",
+   "5m",
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] --wat"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: --wat (at <TS>Z). End your turn now.\n"
+ },
+ "in-note-words-joined": {
+  "argv": [
+   "in",
+   "5m",
+   "check",
+   "the",
+   "build"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] check the build"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: check the build (at <TS>Z). End your turn now.\n"
+ },
+ "in-pulse-flag": {
+  "argv": [
+   "--pulse",
+   "flagid",
+   "in",
+   "1m",
+   "hi"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] hi"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/flagid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: hi (at <TS>Z). End your turn now.\n"
+ },
+ "in-reply-refused": {
+  "argv": [
+   "in",
+   "5m"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "pulsar-wait: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "in-seconds": {
+  "argv": [
+   "in",
+   "90s"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] pulsar-wait reminder"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when your scheduled reminder fires: pulsar-wait reminder (at <TS>Z). End your turn now.\n"
+ },
+ "in-zero": {
+  "argv": [
+   "in",
+   "0"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: duration must be positive\n",
+  "stdout": ""
+ },
+ "in-zero-minutes": {
+  "argv": [
+   "in",
+   "0m"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: duration must be positive\n",
+  "stdout": ""
+ },
+ "list-200-not-json": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   "nope"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-404-error-envelope": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   404,
+   {
+    "error": {
+     "message": "no"
+    },
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-500-text": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   500,
+   "boom"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-bare-list": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   [
+    {
+     "id": "w9",
+     "kind": "http",
+     "mode": "once",
+     "note": null
+    }
+   ]
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-cwd-id": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": []
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=pid123abc&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open watches\n"
+ },
+ "list-empty-object": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {}
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open watches\n"
+ },
+ "list-empty-value": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": []
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open watches\n"
+ },
+ "list-empty-watches": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "watches": []
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open watches\n"
+ },
+ "list-extra-args-ignored": {
+  "argv": [
+   "list",
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": []
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open watches\n"
+ },
+ "list-no-id": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd\n",
+  "stdout": ""
+ },
+ "list-refused": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-value-list": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": [
+     {
+      "id": "w1",
+      "kind": "log",
+      "mode": "edge",
+      "note": "x"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "w1   log         edge  x\n"
+ },
+ "list-watches-key": {
+  "argv": [
+   "list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "watches": [
+      {
+       "id": "w1",
+       "kind": "file",
+       "mode": "once",
+       "note": "pulsar-wait: file /tmp/f"
+      },
+      {
+       "id": "w2",
+       "kind": "pulse_state",
+       "mode": "edge",
+       "note": "n2"
+      },
+      {
+       "id": "w3"
+      }
+     ]
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/watches/conditions?pulse_id=envid&state=watching"
+   }
+  ],
+  "stderr": "",
+  "stdout": "w1   file        once  pulsar-wait: file /tmp/f\nw2   pulse_state edge  n2\nw3                     \n"
+ },
+ "log": {
+  "argv": [
+   "log",
+   "/tmp/gate.log",
+   "exit [0-9]+"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "log",
+     "mode": "once",
+     "note": "pulsar-wait: log /tmp/gate.log exit [0-9]+",
+     "pulse_id": "envid",
+     "spec": {
+      "path": "/tmp/gate.log",
+      "pattern": "exit [0-9]+"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when /exit [0-9]+/ shows up in /tmp/gate.log. End your turn now.\n"
+ },
+ "log-extra-arg": {
+  "argv": [
+   "log",
+   "/tmp/g",
+   "x",
+   "y"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown arg 'y'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "log-missing-all": {
+  "argv": [
+   "log"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait log <path> <regex>\n",
+  "stdout": ""
+ },
+ "log-missing-regex": {
+  "argv": [
+   "log",
+   "/tmp/gate.log"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait log <path> <regex>\n",
+  "stdout": ""
+ },
+ "log-no-id": {
+  "argv": [
+   "log",
+   "/tmp/f",
+   "x"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "log-options": {
+  "argv": [
+   "log",
+   "/tmp/g",
+   "x",
+   "--edge",
+   "--note",
+   "n"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "log",
+     "mode": "edge",
+     "note": "n",
+     "pulse_id": "envid",
+     "spec": {
+      "path": "/tmp/g",
+      "pattern": "x"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when /x/ shows up in /tmp/g. End your turn now.\n"
+ },
+ "max-ctx-missing-value": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--max-ctx"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "--max-ctx needs a token count\n",
+  "stdout": ""
+ },
+ "max-ctx-not-a-number": {
+  "argv": [
+   "pulse",
+   "t",
+   "--max-ctx",
+   "x"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse t stops or goes stale or its context reaches x tokens. End your turn now.\n"
+ },
+ "no-args-usage-exit-1": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "note-missing-value": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--note"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "--note needs text\n",
+  "stdout": ""
+ },
+ "pulse": {
+  "argv": [
+   "pulse",
+   "target1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "pulse_state",
+     "mode": "once",
+     "note": "pulsar-wait: pulse target1",
+     "pulse_id": "envid",
+     "spec": {
+      "stale": true,
+      "stopped": true,
+      "target_id": "target1"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse target1 stops or goes stale. End your turn now.\n"
+ },
+ "pulse-extra-arg": {
+  "argv": [
+   "pulse",
+   "t",
+   "u"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown arg 'u'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "pulse-flag-alone": {
+  "argv": [
+   "--pulse"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait --pulse <id> <verb ...>\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "pulse-flag-beats-env": {
+  "argv": [
+   "--pulse",
+   "flagid",
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "flagid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "pulse-flag-file": {
+  "argv": [
+   "--pulse",
+   "flagid",
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "flagid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "pulse-flag-then-help": {
+  "argv": [
+   "--pulse",
+   "x",
+   "-h"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "pulse-flag-too-short": {
+  "argv": [
+   "--pulse",
+   "x"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait --pulse <id> <verb ...>\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ },
+ "pulse-flags-before-target": {
+  "argv": [
+   "pulse",
+   "--idle",
+   "target1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "pulse_state",
+     "mode": "edge",
+     "note": "pulsar-wait: pulse target1 --idle",
+     "pulse_id": "envid",
+     "spec": {
+      "idle": true,
+      "stale": true,
+      "stopped": true,
+      "target_id": "target1"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse target1 stops or goes stale or ends a turn (idle). End your turn now.\n"
+ },
+ "pulse-idle": {
+  "argv": [
+   "pulse",
+   "target1",
+   "--idle"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "pulse_state",
+     "mode": "edge",
+     "note": "pulsar-wait: pulse target1 --idle",
+     "pulse_id": "envid",
+     "spec": {
+      "idle": true,
+      "stale": true,
+      "stopped": true,
+      "target_id": "target1"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse target1 stops or goes stale or ends a turn (idle). End your turn now.\n"
+ },
+ "pulse-idle-edge-every": {
+  "argv": [
+   "pulse",
+   "t",
+   "--idle",
+   "--every",
+   "30"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "interval_seconds": 30,
+     "kind": "pulse_state",
+     "mode": "edge",
+     "note": "pulsar-wait: pulse t --idle",
+     "pulse_id": "envid",
+     "spec": {
+      "idle": true,
+      "stale": true,
+      "stopped": true,
+      "target_id": "t"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse t stops or goes stale or ends a turn (idle). End your turn now.\n"
+ },
+ "pulse-idle-max-ctx-note": {
+  "argv": [
+   "pulse",
+   "target1",
+   "--idle",
+   "--max-ctx",
+   "5",
+   "--note",
+   "n"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "pulse_state",
+     "mode": "edge",
+     "note": "n",
+     "pulse_id": "envid",
+     "spec": {
+      "idle": true,
+      "max_ctx": 5,
+      "stale": true,
+      "stopped": true,
+      "target_id": "target1"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse target1 stops or goes stale or ends a turn (idle) or its context reaches 5 tokens. End your turn now.\n"
+ },
+ "pulse-max-ctx": {
+  "argv": [
+   "pulse",
+   "target1",
+   "--max-ctx",
+   "100000"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "pulse_state",
+     "mode": "once",
+     "note": "pulsar-wait: pulse target1 --max-ctx 100000",
+     "pulse_id": "envid",
+     "spec": {
+      "max_ctx": 100000,
+      "stale": true,
+      "stopped": true,
+      "target_id": "target1"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when pulse target1 stops or goes stale or its context reaches 100000 tokens. End your turn now.\n"
+ },
+ "pulse-missing-target": {
+  "argv": [
+   "pulse"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait pulse <id>\n",
+  "stdout": ""
+ },
+ "pulse-no-id": {
+  "argv": [
+   "pulse",
+   "t"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-wait: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or pass --pulse <id>.\n",
+  "stdout": ""
+ },
+ "reply-200-list": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   [
+    1
+   ]
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "registered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-200-not-json": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   "not json"
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "registered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-200-value-list": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": [
+     1
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "registered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-201": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   201,
+   {
+    "ok": true,
+    "value": {
+     "id": "w2"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w2\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-204": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   204,
+   ""
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "registered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-404-envelope": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   404,
+   {
+    "error": {
+     "message": "no"
+    },
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "pulsar-wait: daemon returned 404:\n{\"ok\": false, \"error\": {\"message\": \"no\"}}\n",
+  "stdout": ""
+ },
+ "reply-500-empty": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   500,
+   ""
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "pulsar-wait: daemon returned 500:\n\n",
+  "stdout": ""
+ },
+ "reply-500-text-trailing-newlines": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   500,
+   "boom\n\n"
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "pulsar-wait: daemon returned 500:\nboom\n",
+  "stdout": ""
+ },
+ "reply-bare-object": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "id": "w6"
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w6\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-empty-watch-falls-to-value": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": {
+     "id": "w8",
+     "watch": {}
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w8\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-no-id": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "registered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-null-id": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": {
+     "id": null
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: None\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-numeric-id": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": {
+     "id": 12
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: 12\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "reply-refused": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "pulsar-wait: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "reply-schedule-key": {
+  "argv": [
+   "in",
+   "5m"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "schedule": {
+      "id": "s7"
+     }
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "at_iso": "<TS>",
+     "kind": "once",
+     "prompt": "[pulsar-wait] pulsar-wait reminder"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/envid/schedules"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: s7\nregistered \u2014 the daemon will message you when your scheduled reminder fires: pulsar-wait reminder (at <TS>Z). End your turn now.\n"
+ },
+ "reply-watch-key": {
+  "argv": [
+   "file",
+   "/tmp/f"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "watch": {
+      "id": "w5"
+     }
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "kind": "file",
+     "mode": "once",
+     "note": "pulsar-wait: file /tmp/f",
+     "pulse_id": "envid",
+     "spec": {
+      "exists": true,
+      "path": "/tmp/f"
+     }
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "id: w5\nregistered \u2014 the daemon will message you when the file /tmp/f appears. End your turn now.\n"
+ },
+ "rm": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "DELETE",
+    "path": "/watches/conditions/w1"
+   }
+  ],
+  "stderr": "",
+  "stdout": "deleted watch w1\n"
+ },
+ "rm-201": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   201,
+   {}
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "DELETE",
+    "path": "/watches/conditions/w1"
+   }
+  ],
+  "stderr": "",
+  "stdout": "deleted watch w1\n"
+ },
+ "rm-204": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   204,
+   ""
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "DELETE",
+    "path": "/watches/conditions/w1"
+   }
+  ],
+  "stderr": "",
+  "stdout": "deleted watch w1\n"
+ },
+ "rm-404": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   404,
+   {
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "DELETE",
+    "path": "/watches/conditions/w1"
+   }
+  ],
+  "stderr": "pulsar-wait: delete returned 404\n",
+  "stdout": ""
+ },
+ "rm-500": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   500,
+   "boom"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "DELETE",
+    "path": "/watches/conditions/w1"
+   }
+  ],
+  "stderr": "pulsar-wait: delete returned 500\n",
+  "stdout": ""
+ },
+ "rm-missing-id": {
+  "argv": [
+   "rm"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "usage: pulsar-wait rm <id>\n",
+  "stdout": ""
+ },
+ "rm-needs-no-pulse-id": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {}
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "DELETE",
+    "path": "/watches/conditions/w1"
+   }
+  ],
+  "stderr": "",
+  "stdout": "deleted watch w1\n"
+ },
+ "rm-refused": {
+  "argv": [
+   "rm",
+   "w1"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "pulsar-wait: delete returned 000\n",
+  "stdout": ""
+ },
+ "timeout-missing-value": {
+  "argv": [
+   "file",
+   "/tmp/f",
+   "--timeout"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "--timeout needs seconds\n",
+  "stdout": ""
+ },
+ "timeout-not-a-number-http": {
+  "argv": [
+   "http",
+   "http://x",
+   "--timeout",
+   "x"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/watches/conditions"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": "id: w1\nregistered \u2014 the daemon will message you when http://x fails or misses 'its text'. End your turn now.\n"
+ },
+ "unknown-verb": {
+  "argv": [
+   "wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "w1"
+    }
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown verb 'wat'\n",
+  "stdout": "pulsar-wait \u2014 register a wait and END YOUR TURN. Never sleep in a tool call.\n\n  pulsar-wait file <path>                      wake when <path> exists\n  pulsar-wait log <path> <regex>               wake when <regex> appears in <path>\n  pulsar-wait http <url> [--contains S] [--up] wake on non-2xx/missing text; --up = wait for UP\n  pulsar-wait cmd '<shell>' [--ok]             wake on non-zero exit; --ok = wait until it succeeds\n  pulsar-wait pulse <id> [--idle] [--max-ctx N] wake when pulse <id> stops, goes stale, or ctx >= N\n                                               --idle: ALSO wake every time its turn ends (helpers!)\n  pulsar-wait in <N>[s|m|h] [note]             wake once after N seconds/minutes/hours\n  pulsar-wait list                             your open watches (id, kind, note)\n  pulsar-wait rm <id>                          delete a watch \u2014 DO this when the work ends\n\nOptions for file/log/http/cmd/pulse:\n  --edge          keep the watch after it fires; refire only after the condition clears\n                  (default is once: the watch closes after its first fire)\n  --every N       check every N seconds (default 60, min 30)\n  --timeout N     http/cmd only: give the probe N seconds (max 20)\n  --note 'text'   what to echo back in the wake-up message\n\nAn open watch outlives your turn and your task: `pulsar-wait rm <id>` when\nthe job is done, or the daemon keeps waking a pulse that has nothing to do.\n\n"
+ }
+}

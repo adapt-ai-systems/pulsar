@@ -1,0 +1,291 @@
+{
+ "daemon-202": {
+  "argv": [
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   202,
+   {
+    "ok": true,
+    "value": {
+     "queued": "x.json"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "from_pulse_id": "pid123abc",
+     "text": "hi"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/ffffffff6666/messages"
+   }
+  ],
+  "stderr": "",
+  "stdout": "queued for ffffffff6666 (2 chars)\n"
+ },
+ "daemon-404": {
+  "argv": [
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   404,
+   {
+    "error": {
+     "message": "no such pulse"
+    },
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "from_pulse_id": "pid123abc",
+     "text": "hi"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/ffffffff6666/messages"
+   }
+  ],
+  "stderr": "pulsar-msg: daemon returned 404: {\"ok\": false, \"error\": {\"message\": \"no such pulse\"}}\n",
+  "stdout": ""
+ },
+ "daemon-down": {
+  "argv": [
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "pulsar-msg: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "empty-text": {
+  "argv": [
+   "ffffffff6666",
+   "  "
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-msg: empty message (pass the text as arguments or on stdin)\n",
+  "stdout": ""
+ },
+ "from-cwd": {
+  "argv": [
+   "ffffffff6666",
+   "hello",
+   "there"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "from_pulse_id": "pid123abc",
+     "text": "hello there"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/ffffffff6666/messages"
+   }
+  ],
+  "stderr": "",
+  "stdout": "sent to ffffffff6666 (11 chars)\n"
+ },
+ "from-env": {
+  "argv": [
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSAR_PULSE_ID": "envpulse42"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "from_pulse_id": "envpulse42",
+     "text": "hi"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/ffffffff6666/messages"
+   }
+  ],
+  "stderr": "",
+  "stdout": "sent to ffffffff6666 (2 chars)\n"
+ },
+ "from-flag": {
+  "argv": [
+   "--from",
+   "flagpulse7",
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "from_pulse_id": "flagpulse7",
+     "text": "hi"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/ffffffff6666/messages"
+   }
+  ],
+  "stderr": "",
+  "stdout": "sent to ffffffff6666 (2 chars)\n"
+ },
+ "help-flag": {
+  "argv": [
+   "--help"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-msg \u2014 message another pulse (wakes it if stopped).\n\n  pulsar-msg <target_pulse_id> \"the text\"\n  pulsar-msg <target_pulse_id> < report.md        # text from stdin\n  pulsar-msg --from <my_id> <target_pulse_id> \"...\"\n\nThe sender id (from_pulse_id) is taken from the cwd (pulses run in\n<data>/pulses/<id>/cli), then $PULSAR_PULSE_ID, or --from. The target sees\n\"[message from 'Your title' (pulse <your id>)] the text\". Find ids with\npulsar-roster --grep <title>. Any apostrophes, quotes, parentheses or\nnewlines in the text are fine: the JSON is built here, not in your shell.\n"
+ },
+ "no-args": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-msg \u2014 message another pulse (wakes it if stopped).\n\n  pulsar-msg <target_pulse_id> \"the text\"\n  pulsar-msg <target_pulse_id> < report.md        # text from stdin\n  pulsar-msg --from <my_id> <target_pulse_id> \"...\"\n\nThe sender id (from_pulse_id) is taken from the cwd (pulses run in\n<data>/pulses/<id>/cli), then $PULSAR_PULSE_ID, or --from. The target sees\n\"[message from 'Your title' (pulse <your id>)] the text\". Find ids with\npulsar-roster --grep <title>. Any apostrophes, quotes, parentheses or\nnewlines in the text are fine: the JSON is built here, not in your shell.\n"
+ },
+ "no-sender": {
+  "argv": [
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-msg: can't tell which pulse you are; pass --from <id>\n",
+  "stdout": ""
+ },
+ "self-target": {
+  "argv": [
+   "--from",
+   "ffffffff6666",
+   "ffffffff6666",
+   "hi"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-msg: target is your own pulse id\n",
+  "stdout": ""
+ },
+ "tricky-text": {
+  "argv": [
+   "ffffffff6666",
+   "it's (done); \"quoted\" & $PATH `x`"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "from_pulse_id": "pid123abc",
+     "text": "it's (done); \"quoted\" & $PATH `x`"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/pulses/ffffffff6666/messages"
+   }
+  ],
+  "stderr": "",
+  "stdout": "sent to ffffffff6666 (33 chars)\n"
+ }
+}

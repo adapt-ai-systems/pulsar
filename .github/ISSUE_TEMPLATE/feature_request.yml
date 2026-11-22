@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose a change to Pulsar.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The core stays small. Skills and new add-ons live in their own repositories.
+        See "What we take" in CONTRIBUTING.md before you write this.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you cannot do today, or what is hard to do.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The change you propose
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried or considered
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you send
+      options:
+        - label: I searched the open and closed issues for the same request.
+          required: true

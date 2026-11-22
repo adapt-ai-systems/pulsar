@@ -1,0 +1,358 @@
+{
+  "_doc": "Tuned local-model presets for Pulsar. Apply a preset with `ops/bin/pulsar-models add <preset> --url http://127.0.0.1:8000/v1` (see `pulsar-models presets`). Placeholder endpoints are http://127.0.0.1:8000/v1; replace with your local OpenAI-compatible server URL.",
+  "presets": {
+    "pi-glm53-full": {
+      "description": "GLM-5.3 Full on Pi (RPC, GLM thinking profile, text-only with vision sidecar, max_concurrent 2)",
+      "model": {
+        "id": "pi-glm53-full",
+        "label": "GLM 5.3 Full",
+        "vessel": "pi",
+        "local": true,
+        "max_concurrent": 2,
+        "prompt_notes": [
+          "vision"
+        ],
+        "default_handoff": 300000,
+        "efforts": [
+          "off",
+          "low",
+          "high",
+          "max"
+        ],
+        "default_effort": "high",
+        "wire_model": "glm53local/glm-5.3",
+        "pi_rpc": true,
+        "thinking": "glm"
+      },
+      "pi_provider": {
+        "name": "glm53local",
+        "config": {
+          "baseUrl": "http://127.0.0.1:8000/v1",
+          "api": "openai-completions",
+          "apiKey": "none",
+          "compat": {
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": true,
+            "maxTokensField": "max_tokens",
+            "thinkingFormat": "qwen-chat-template"
+          },
+          "models": [
+            {
+              "id": "glm-5.3",
+              "name": "GLM-5.3 Full",
+              "reasoning": true,
+              "thinkingLevelMap": {
+                "minimal": null,
+                "low": "low",
+                "medium": null,
+                "high": "high",
+                "xhigh": "max"
+              },
+              "input": [
+                "text"
+              ],
+              "contextWindow": 200000,
+              "maxTokens": 131072,
+              "compat": {
+                "supportsDeveloperRole": false,
+                "supportsReasoningEffort": true,
+                "maxTokensField": "max_tokens",
+                "thinkingFormat": "qwen-chat-template"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "pi-glm-flash": {
+      "description": "GLM-5.3 Flash on Pi (RPC, GLM thinking profile, multimodal, 1M context)",
+      "model": {
+        "id": "pi-glm-flash",
+        "label": "GLM 5.3 Flash",
+        "vessel": "pi",
+        "local": true,
+        "default_handoff": 150000,
+        "efforts": [
+          "off",
+          "low",
+          "high",
+          "max"
+        ],
+        "default_effort": "low",
+        "wire_model": "glm53local/glm-5.3-flash",
+        "pi_rpc": true,
+        "thinking": "glm"
+      },
+      "pi_provider": {
+        "name": "glm53local",
+        "config": {
+          "baseUrl": "http://127.0.0.1:8000/v1",
+          "api": "openai-completions",
+          "apiKey": "none",
+          "compat": {
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": true,
+            "maxTokensField": "max_tokens",
+            "thinkingFormat": "qwen-chat-template"
+          },
+          "models": [
+            {
+              "id": "glm-5.3-flash",
+              "name": "GLM-5.3 Flash",
+              "reasoning": true,
+              "thinkingLevelMap": {
+                "minimal": null,
+                "low": "low",
+                "medium": null,
+                "high": "high",
+                "xhigh": "max"
+              },
+              "input": [
+                "text",
+                "image"
+              ],
+              "contextWindow": 1048576,
+              "maxTokens": 131072,
+              "compat": {
+                "supportsDeveloperRole": false,
+                "supportsReasoningEffort": true,
+                "maxTokensField": "max_tokens",
+                "thinkingFormat": "qwen-chat-template"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "pi-qwen38-flash": {
+      "description": "Qwen 3.8 Flash on Pi (RPC, Qwen 3.8 thinking profile, 256k context)",
+      "model": {
+        "id": "pi-qwen38-flash",
+        "label": "Qwen 3.8 Flash",
+        "vessel": "pi",
+        "local": true,
+        "default_handoff": 175000,
+        "efforts": [
+          "off",
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default_effort": "low",
+        "wire_model": "glmlocal/Qwen3.8-Flash-Next-NVFP4",
+        "pi_rpc": true,
+        "thinking": "qwen38"
+      },
+      "pi_provider": {
+        "name": "glmlocal",
+        "config": {
+          "baseUrl": "http://127.0.0.1:8000/v1",
+          "api": "openai-completions",
+          "apiKey": "none",
+          "compat": {
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": true,
+            "maxTokensField": "max_tokens",
+            "thinkingFormat": "qwen-chat-template"
+          },
+          "models": [
+            {
+              "id": "Qwen3.8-Flash-Next-NVFP4",
+              "name": "Qwen 3.8 Flash",
+              "reasoning": true,
+              "contextWindow": 262143,
+              "maxTokens": 8192,
+              "thinkingLevelMap": {
+                "minimal": null,
+                "low": "low",
+                "medium": "medium",
+                "high": "xhigh"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "pi-qwen27": {
+      "description": "Qwen 3.8 27B on Pi (RPC, Qwen 3.8 thinking profile, multimodal, 192k context)",
+      "model": {
+        "id": "pi-qwen27",
+        "label": "Qwen 3.8 27B",
+        "vessel": "pi",
+        "local": true,
+        "default_handoff": 100000,
+        "efforts": [
+          "off",
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "wire_model": "localqwen/qwen3.8-27b",
+        "pi_rpc": true,
+        "thinking": "qwen38"
+      },
+      "pi_provider": {
+        "name": "localqwen",
+        "config": {
+          "baseUrl": "http://127.0.0.1:8000/v1",
+          "api": "openai-completions",
+          "apiKey": "none",
+          "compat": {
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": false
+          },
+          "models": [
+            {
+              "id": "qwen3.8-27b",
+              "name": "Qwen3.8 27B EXL3",
+              "input": [
+                "text",
+                "image"
+              ],
+              "reasoning": true,
+              "contextWindow": 196608,
+              "maxTokens": 32768,
+              "thinkingLevelMap": {
+                "off": "none",
+                "minimal": null,
+                "low": "low",
+                "medium": "medium",
+                "high": null,
+                "xhigh": "xhigh"
+              },
+              "compat": {
+                "thinkingFormat": "qwen-chat-template",
+                "supportsReasoningEffort": true,
+                "supportsDeveloperRole": false,
+                "maxTokensField": "max_tokens"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "pi-ds41-flash": {
+      "description": "DeepSeek V4.1 Flash on Pi (RPC, numeric DS41 thinking dial 80/70/50/30/none, 1M context)",
+      "model": {
+        "id": "pi-ds41-flash",
+        "label": "DeepSeek V4.1 Flash",
+        "vessel": "pi",
+        "local": true,
+        "default_handoff": 250000,
+        "efforts": [
+          "80",
+          "70",
+          "50",
+          "30",
+          "none"
+        ],
+        "effort_aliases": {
+          "off": "none",
+          "low": "50",
+          "high": "80",
+          "xhigh": "80",
+          "max": "80"
+        },
+        "default_effort": "none",
+        "wire_model": "ds41local/deepseek-v4.1-flash",
+        "pi_rpc": true,
+        "thinking": "ds41"
+      },
+      "pi_provider": {
+        "name": "ds41local",
+        "config": {
+          "baseUrl": "http://127.0.0.1:8000/v1",
+          "api": "openai-completions",
+          "apiKey": "none",
+          "models": [
+            {
+              "id": "deepseek-v4.1-flash",
+              "name": "DeepSeek V4.1 Flash (1M ctx)",
+              "input": [
+                "text",
+                "image"
+              ],
+              "contextWindow": 1048575,
+              "maxTokens": 16384,
+              "reasoning": true,
+              "thinkingLevelMap": {
+                "minimal": "30",
+                "low": "50",
+                "medium": "70",
+                "high": "80",
+                "xhigh": null
+              },
+              "compat": {
+                "thinkingFormat": "openrouter",
+                "supportsReasoningEffort": true,
+                "supportsDeveloperRole": false,
+                "maxTokensField": "max_tokens"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "codex-ds4-flash": {
+      "description": "DeepSeek V4 Flash via the Codex vessel (uses pulsar/vessel/ds4-models.json catalog)",
+      "model": {
+        "id": "codex-ds4-flash",
+        "label": "DeepSeek V4 Flash (Codex)",
+        "vessel": "codex",
+        "local": true,
+        "prompt_notes": [
+          "ds4_clarity"
+        ],
+        "default_handoff": 175000,
+        "base_url": "http://127.0.0.1:8000/v1",
+        "wire_model": "deepseek-v4-flash"
+      }
+    },
+    "local-openai": {
+      "description": "Generic OpenAI-compatible local model on Pi (RPC, passthrough thinking)",
+      "model": {
+        "id": "local-openai",
+        "label": "Local OpenAI-compatible",
+        "vessel": "pi",
+        "local": true,
+        "default_handoff": 175000,
+        "wire_model": "local/model",
+        "pi_rpc": true,
+        "thinking": "passthrough"
+      },
+      "pi_provider": {
+        "name": "local",
+        "config": {
+          "baseUrl": "http://127.0.0.1:8000/v1",
+          "api": "openai-completions",
+          "apiKey": "none",
+          "compat": {
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": false
+          },
+          "models": [
+            {
+              "id": "model",
+              "name": "Local OpenAI-compatible",
+              "input": [
+                "text"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "local-slot": {
+      "description": "Dynamic local slot on Pi (probes GET <base_url>/models at runtime)",
+      "model": {
+        "id": "local-slot",
+        "label": "Local slot",
+        "vessel": "pi",
+        "local": true,
+        "slot": true,
+        "base_url": "http://127.0.0.1:8000/v1",
+        "default_handoff": 190000
+      }
+    }
+  }
+}

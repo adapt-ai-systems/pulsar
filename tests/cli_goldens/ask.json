@@ -1,0 +1,1165 @@
+{
+ "choice-missing-value": {
+  "argv": [
+   "Q",
+   "--choice"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "--choice needs a value\n",
+  "stdout": ""
+ },
+ "choices": {
+  "argv": [
+   "Which?",
+   "--choice",
+   "A",
+   "--choice",
+   "B"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [
+      "A",
+      "B"
+     ],
+     "pulse_id": "envid",
+     "text": "Which?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "choices-default-context": {
+  "argv": [
+   "Which?",
+   "--choice",
+   "A",
+   "--choice",
+   "B",
+   "--default",
+   "A",
+   "--context",
+   "why it matters"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [
+      "A",
+      "B"
+     ],
+     "context": "why it matters",
+     "default_choice": "A",
+     "pulse_id": "envid",
+     "text": "Which?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "context-missing-value": {
+  "argv": [
+   "Q",
+   "--context"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "--context needs a value\n",
+  "stdout": ""
+ },
+ "daemon-refused": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "pulsar-ask: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "default-missing-value": {
+  "argv": [
+   "Q",
+   "--default"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "--default needs a value\n",
+  "stdout": ""
+ },
+ "empty-default-and-context-omitted": {
+  "argv": [
+   "Q",
+   "--default",
+   "",
+   "--context",
+   ""
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "env-beats-cwd": {
+  "argv": [
+   "Ship it?"
+  ],
+  "cwd": "pulse",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Ship it?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "help-flag": {
+  "argv": [
+   "--help"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-ask \u2014 ask the user a question that stays pinned in your pane until they\nanswer. Then END YOUR TURN; the answer arrives as a message.\n\n  pulsar-ask \"<question>\"                                     free-text answer\n  pulsar-ask \"<question>\" --choice A --choice B [--default A]  tap-to-answer buttons\n  pulsar-ask \"<question>\" --context \"<one line: why / what happens next>\"\n  pulsar-ask --list                                           your open questions\n"
+ },
+ "help-not-first-is-unknown-arg": {
+  "argv": [
+   "Q",
+   "--help"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown arg '--help'\n",
+  "stdout": "pulsar-ask \u2014 ask the user a question that stays pinned in your pane until they\nanswer. Then END YOUR TURN; the answer arrives as a message.\n\n  pulsar-ask \"<question>\"                                     free-text answer\n  pulsar-ask \"<question>\" --choice A --choice B [--default A]  tap-to-answer buttons\n  pulsar-ask \"<question>\" --context \"<one line: why / what happens next>\"\n  pulsar-ask --list                                           your open questions\n"
+ },
+ "help-short": {
+  "argv": [
+   "-h"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-ask \u2014 ask the user a question that stays pinned in your pane until they\nanswer. Then END YOUR TURN; the answer arrives as a message.\n\n  pulsar-ask \"<question>\"                                     free-text answer\n  pulsar-ask \"<question>\" --choice A --choice B [--default A]  tap-to-answer buttons\n  pulsar-ask \"<question>\" --context \"<one line: why / what happens next>\"\n  pulsar-ask --list                                           your open questions\n"
+ },
+ "list-200-not-json": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   "not json"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-404-json-still-parsed": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   404,
+   {
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open questions\n"
+ },
+ "list-500-text": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   500,
+   "boom"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-bare-list-is-empty": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   [
+    {
+     "id": "q"
+    }
+   ]
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open questions\n"
+ },
+ "list-cwd-id": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "created_at": "Mon 01:02",
+      "id": "q1",
+      "text": "Ship it?"
+     },
+     {
+      "created_at": "Mon 04:05",
+      "id": "q2",
+      "text": "Which colour?"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=pid123abc"
+   }
+  ],
+  "stderr": "",
+  "stdout": "q1  Mon 01:02  Ship it?\nq2  Mon 04:05  Which colour?\n"
+ },
+ "list-empty": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": []
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open questions\n"
+ },
+ "list-entries": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "created_at": "Mon 01:02",
+      "id": "q1",
+      "text": "Ship it?"
+     },
+     {
+      "created_at": "Mon 04:05",
+      "id": "q2",
+      "text": "Which colour?"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "",
+  "stdout": "q1  Mon 01:02  Ship it?\nq2  Mon 04:05  Which colour?\n"
+ },
+ "list-entry-missing-field": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": [
+     {
+      "id": "q1"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "list-extra-args-ignored": {
+  "argv": [
+   "--list",
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "created_at": "Mon 01:02",
+      "id": "q1",
+      "text": "Ship it?"
+     },
+     {
+      "created_at": "Mon 04:05",
+      "id": "q2",
+      "text": "Which colour?"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "",
+  "stdout": "q1  Mon 01:02  Ship it?\nq2  Mon 04:05  Which colour?\n"
+ },
+ "list-no-value-key": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/questions?pulse_id=envid"
+   }
+  ],
+  "stderr": "",
+  "stdout": "no open questions\n"
+ },
+ "list-refused": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": null,
+  "requests": [],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "no-args-usage-exit-2": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-ask \u2014 ask the user a question that stays pinned in your pane until they\nanswer. Then END YOUR TURN; the answer arrives as a message.\n\n  pulsar-ask \"<question>\"                                     free-text answer\n  pulsar-ask \"<question>\" --choice A --choice B [--default A]  tap-to-answer buttons\n  pulsar-ask \"<question>\" --context \"<one line: why / what happens next>\"\n  pulsar-ask --list                                           your open questions\n"
+ },
+ "no-id": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-ask: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or set PULSE_ID.\n",
+  "stdout": ""
+ },
+ "no-id-list": {
+  "argv": [
+   "--list"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-ask: cannot derive pulse id from cwd (<TMP>/plain). Run from a pulse's cli dir or set PULSE_ID.\n",
+  "stdout": ""
+ },
+ "ok-cwd-id": {
+  "argv": [
+   "Ship it?"
+  ],
+  "cwd": "pulse",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "pid123abc",
+     "text": "Ship it?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "ok-cwd-nested": {
+  "argv": [
+   "Ship it?"
+  ],
+  "cwd": "nested",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "sub",
+     "text": "Ship it?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "ok-cwd-symlink": {
+  "argv": [
+   "Ship it?"
+  ],
+  "cwd": "link",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "linked",
+     "text": "Ship it?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "ok-free-text": {
+  "argv": [
+   "Ship it?"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Ship it?"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "reply-200-bare-object": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "id": "q8"
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q8 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q8]\".\n"
+ },
+ "reply-200-list": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   []
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": "question  posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question ]\".\n"
+ },
+ "reply-200-no-id": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question  posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question ]\".\n"
+ },
+ "reply-200-not-json": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   "not json"
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": "question  posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question ]\".\n"
+ },
+ "reply-201": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   201,
+   {
+    "ok": true,
+    "value": {
+     "id": "q7"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q7 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q7]\".\n"
+ },
+ "reply-204-empty": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   204,
+   ""
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": "question  posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question ]\".\n"
+ },
+ "reply-404-envelope": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   404,
+   {
+    "error": {
+     "message": "no"
+    },
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "pulsar-ask: daemon returned 404:\n{\"ok\": false, \"error\": {\"message\": \"no\"}}\n",
+  "stdout": ""
+ },
+ "reply-500-empty": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   500,
+   ""
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "pulsar-ask: daemon returned 500:\n\n",
+  "stdout": ""
+ },
+ "reply-500-text-trailing-newlines": {
+  "argv": [
+   "Q"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   500,
+   "boom\n\n"
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [],
+     "pulse_id": "envid",
+     "text": "Q"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "pulsar-ask: daemon returned 500:\nboom\n",
+  "stdout": ""
+ },
+ "second-positional-is-unknown": {
+  "argv": [
+   "Q",
+   "extra"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown arg 'extra'\n",
+  "stdout": "pulsar-ask \u2014 ask the user a question that stays pinned in your pane until they\nanswer. Then END YOUR TURN; the answer arrives as a message.\n\n  pulsar-ask \"<question>\"                                     free-text answer\n  pulsar-ask \"<question>\" --choice A --choice B [--default A]  tap-to-answer buttons\n  pulsar-ask \"<question>\" --context \"<one line: why / what happens next>\"\n  pulsar-ask --list                                           your open questions\n"
+ },
+ "text-looks-like-flag": {
+  "argv": [
+   "--choice",
+   "--choice",
+   "A"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [
+      "A"
+     ],
+     "pulse_id": "envid",
+     "text": "--choice"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "unicode-and-quotes": {
+  "argv": [
+   "Say \"hi\" \u2014 caf\u00e9 $HOME `id`",
+   "--choice",
+   "O'K"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {
+     "id": "q1"
+    }
+   }
+  ],
+  "requests": [
+   {
+    "body": {
+     "choices": [
+      "O'K"
+     ],
+     "pulse_id": "envid",
+     "text": "Say \"hi\" \u2014 caf\u00e9 $HOME `id`"
+    },
+    "content_type": "application/json",
+    "method": "POST",
+    "path": "/questions"
+   }
+  ],
+  "stderr": "",
+  "stdout": "question q1 posted \u2014 it stays in your pane until the user answers.\nEND YOUR TURN now; the answer arrives as a message starting \"[The user answered your question q1]\".\n"
+ },
+ "unknown-arg": {
+  "argv": [
+   "Q",
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {
+   "PULSE_ID": "envid"
+  },
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "unknown arg '--wat'\n",
+  "stdout": "pulsar-ask \u2014 ask the user a question that stays pinned in your pane until they\nanswer. Then END YOUR TURN; the answer arrives as a message.\n\n  pulsar-ask \"<question>\"                                     free-text answer\n  pulsar-ask \"<question>\" --choice A --choice B [--default A]  tap-to-answer buttons\n  pulsar-ask \"<question>\" --context \"<one line: why / what happens next>\"\n  pulsar-ask --list                                           your open questions\n"
+ }
+}

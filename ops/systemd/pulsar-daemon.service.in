@@ -1,0 +1,22 @@
+[Unit]
+Description=Pulsar daemon (localhost HTTP and WebSocket API)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=@REPO_DIR@
+Environment=PYTHONUNBUFFERED=1
+Environment="PULSAR_DATA=@DATA_DIR_QUOTED@"
+Environment=PULSAR_DAEMON=http://127.0.0.1:@DAEMON_PORT@
+Environment=PULSAR_PORT=@DAEMON_PORT@
+Environment="PATH=@SERVICE_PATH_QUOTED@"
+EnvironmentFile=-@CONFIG_DIR@/pulsar.env
+ExecStart="@VENV_DIR_QUOTED@/bin/python" -m pulsar.daemon
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pulsar-daemon
+
+[Install]
+WantedBy=default.target

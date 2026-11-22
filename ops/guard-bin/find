@@ -1,0 +1,6 @@
+#!/bin/sh
+# pulsar-guard PATH shim: every pulse runner puts this dir first on PATH,
+# so this runs for any vessel before the real find does.
+# Refused -> exit 2 with the reason on stderr. Rules: pulsar/cli/guard.py.
+"$(dirname "$0")/../bin/pulsar-guard" argv find "$@" || exit $?
+if [ -x /usr/bin/find ]; then exec /usr/bin/find "$@"; else exec /bin/find "$@"; fi

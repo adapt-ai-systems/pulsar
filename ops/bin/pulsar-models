@@ -1,0 +1,419 @@
+#!/usr/bin/env python3
+"""pulsar-models — inspect local model endpoints and install local-model presets.
+
+    pulsar-models                 # table: family | pulsar id | host | endpoint | status
+    pulsar-models --all           # include hidden / legacy ids
+    pulsar-models --json          # machine-readable snapshot
+    pulsar-models --check         # exit 1 if a visible local model is DOWN/SWAPPED
+    pulsar-models presets         # list tuned local-model presets
+    pulsar-models add <preset> --url http://127.0.0.1:8000/v1 [--id ID] [--served-id MODEL]
+
+Sources of truth (read every run, never cached):
+  pulsar/models.json          the picker registry (PULSAR_MODELS_PATH overrides)
+  pulsar/models.presets.json  tuned local-model presets (PULSAR_PRESETS_PATH overrides)
+  ~/.pi/agent/models.json     provider -> baseUrl (PULSAR_PI_MODELS_PATH or PI_CODING_AGENT_DIR overrides)
+  GET <baseUrl>/models        what each local endpoint is actually serving
+
+Status words:
+  LIVE      the served id list on that endpoint contains this model's id
+  SWAPPED   endpoint answers but serves something else (shown in the status)
+  DOWN      endpoint unreachable
+  CLOUD     hosted provider, not probed
+"""
+import argparse
+import copy
+import json
+import os
+import re
+import sys
+import tempfile
+import urllib.parse
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+
+REPO = os.environ.get("PULSAR_REPO") or os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+)
+
+FAMILIES = [
+    ("qwen flash", r"qwen3\.?8[- ]flash|Qwen3\.8-Flash"),
+    ("27b", r"qwen3\.?8[- ]27b|qwen3\.8-27b"),
+    ("glm full", r"glm[ -]5\.3[ -]full|glm53local/glm-5\.3$|glm 5\.3 \(z\.ai"),
+    ("glm flash", r"glm[ -]5\.3[ -]flash|GLM-5\.3-Flash"),
+    ("ds4.1 flash", r"v4\.1"),
+    ("ds4 flash", r"v4 flash|deepseek-v4-flash"),
+]
+
+
+def registry_path():
+    return os.environ.get("PULSAR_MODELS_PATH") or os.path.join(REPO, "pulsar", "models.json")
+
+
+def presets_path():
+    return os.environ.get("PULSAR_PRESETS_PATH") or os.path.join(REPO, "pulsar", "models.presets.json")
+
+
+def pi_models_path():
+    if os.environ.get("PULSAR_PI_MODELS_PATH"):
+        return os.environ["PULSAR_PI_MODELS_PATH"]
+    agent_dir = os.environ.get("PI_CODING_AGENT_DIR")
+    if agent_dir:
+        return os.path.join(agent_dir, "models.json")
+    return os.path.expanduser("~/.pi/agent/models.json")
+
+
+def family_of(m):
+    hay = f"{m.get('label', '')} {m.get('wire_model', '')}"
+    for name, rx in FAMILIES:
+        if re.search(rx, hay, re.I):
+            return name
+    return "other"
+
+
+def load_json(path):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def atomic_write_json(path, data):
+    parent = os.path.dirname(os.path.abspath(path))
+    os.makedirs(parent, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix=".tmp-", suffix=".json", dir=parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        os.replace(tmp, path)
+    except Exception:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+
+
+def providers():
+    path = pi_models_path()
+    if not os.path.isfile(path):
+        return {}
+    d = load_json(path)
+    d = d.get("providers", d)
+    out = {}
+    for name, v in d.items():
+        if isinstance(v, dict):
+            out[name] = (v.get("baseUrl") or "").rstrip("/")
+    return out
+
+
+def provider_keys():
+    """Map base URL -> API key from the pi provider config (keyed servers only)."""
+    path = pi_models_path()
+    if not os.path.isfile(path):
+        return {}
+    d = load_json(path)
+    d = d.get("providers", d)
+    out = {}
+    for v in d.values():
+        if not isinstance(v, dict):
+            continue
+        key = v.get("apiKey")
+        base = (v.get("baseUrl") or "").rstrip("/")
+        if not base or not isinstance(key, str) or key in ("", "none") or key.startswith("!"):
+            continue
+        out[base] = os.environ.get(key, key)  # pi accepts an env var name or a literal key
+    return out
+
+
+def probe(base, key=None):
+    """Return (ok, served_ids or error)."""
+    url = base.rstrip("/") + "/models"
+    req = urllib.request.Request(url)
+    if key:
+        req.add_header("Authorization", "Bearer " + key)
+    try:
+        with urllib.request.urlopen(req, timeout=6) as r:
+            data = json.load(r)
+        return True, [m.get("id") for m in data.get("data", []) if isinstance(m, dict)]
+    except Exception as e:  # noqa: BLE001
+        return False, type(e).__name__
+
+
+def host_of(base):
+    parsed = urllib.parse.urlparse(base or "")
+    host = parsed.hostname or ""
+    netloc = parsed.netloc or host
+    return host, netloc
+
+
+def snapshot(include_hidden=False):
+    reg = load_json(registry_path())
+    prov = providers()
+    rows = []
+    bases = set()
+    for m in reg["models"]:
+        if m.get("hidden") and not include_hidden:
+            continue
+        is_local = bool(m.get("local"))
+        wire = m.get("wire_model")
+        base_direct = (m.get("base_url") or "").rstrip("/")
+        if not wire and not base_direct:
+            continue  # cloud vessel without a custom endpoint
+        if m.get("slot") or (m.get("vessel") != "pi" and base_direct):
+            pname = m["id"]
+            served = wire or ""
+            base = base_direct
+            no_provider = not base
+        else:
+            pname, _, served = wire.partition("/")
+            base = prov.get(pname) or ""
+            no_provider = pname not in prov
+        cloud = not is_local
+        _, netloc = host_of(base)
+        if not cloud and not no_provider and base:
+            bases.add(base)
+        rows.append({
+            "family": family_of(m), "id": m["id"], "label": m["label"],
+            "vessel": m["vessel"], "wire_model": wire or "", "provider": pname,
+            "base_url": base, "host": "cloud" if cloud else (netloc or "?"),
+            "served_id": served, "slot": bool(m.get("slot")),
+            "cloud": cloud, "hidden": bool(m.get("hidden")), "no_provider": no_provider,
+        })
+    results = {}
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        keys = provider_keys()
+        order = list(bases)
+        for base, res in zip(order, ex.map(lambda b: probe(b, keys.get(b)), order)):
+            results[base] = res
+    for r in rows:
+        if r["no_provider"]:
+            r["status"] = "NO PROVIDER (%s missing in %s)" % (r["provider"], pi_models_path())
+            r["host"] = "?"
+            continue
+        if r["cloud"]:
+            r["status"] = "CLOUD"
+            continue
+        ok, ids = results[r["base_url"]]
+        if not ok:
+            r["status"] = "DOWN"
+        elif r["slot"]:
+            r["status"] = ("LIVE (%s)" % ", ".join(ids)) if ids else "SWAPPED (serving nothing)"
+        elif r["served_id"] in ids:
+            r["status"] = "LIVE"
+        else:
+            r["status"] = "SWAPPED (serving %s)" % (", ".join(ids) or "nothing")
+    # served ids nobody in the registry points at
+    known = {(r["base_url"], r["served_id"]) for r in rows if r["served_id"]}
+    slot_bases = {r["base_url"] for r in rows if r["slot"]}
+    unregistered = []
+    for base, (ok, ids) in results.items():
+        if ok and base not in slot_bases:
+            _, netloc = host_of(base)
+            for i in ids:
+                if (base, i) not in known:
+                    unregistered.append({
+                        "base_url": base, "host": netloc, "served_id": i,
+                        "family": family_of({"label": i, "wire_model": i}),
+                    })
+    endpoints = [
+        {"base_url": b, "host": host_of(b)[1], "up": ok, "serving": ids if ok else [], "error": None if ok else ids}
+        for b, (ok, ids) in sorted(results.items())
+    ]
+    return {
+        "checked_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "models": rows, "endpoints": endpoints, "unregistered": unregistered,
+    }
+
+
+def table(snap):
+    order = [f for f, _ in FAMILIES] + ["other"]
+    rows = sorted(snap["models"], key=lambda r: (order.index(r["family"]), not r["status"].startswith("LIVE"), r["id"]))
+    w = [max(len(str(r[k])) for r in rows + [{"family": "family", "id": "pulsar id", "host": "host", "base_url": "endpoint"}]) for k in ("family", "id", "host", "base_url")]
+    lines = ["%-*s  %-*s  %-*s  %-*s  %s" % (w[0], "family", w[1], "pulsar id", w[2], "host", w[3], "endpoint", "status")]
+    for r in rows:
+        lines.append("%-*s  %-*s  %-*s  %-*s  %s" % (w[0], r["family"], w[1], r["id"], w[2], r["host"], w[3], r["base_url"], r["status"]))
+    if snap["unregistered"]:
+        lines.append("")
+        lines.append("served but in NO pulsar model id (unreachable from a pulse):")
+        for u in snap["unregistered"]:
+            lines.append("  %-12s %s  %s  %s" % (u["family"], u["served_id"], u["host"], u["base_url"]))
+    lines.append("")
+    lines.append("checked %s" % snap["checked_at"])
+    return "\n".join(lines)
+
+
+def _merge_pi_provider(pi_path, provider_name, provider_cfg):
+    """Merge provider_cfg into pi_path without overwriting unrelated keys or models."""
+    if os.path.isfile(pi_path):
+        doc = load_json(pi_path)
+        if not isinstance(doc, dict):
+            doc = {}
+    else:
+        doc = {}
+    provs = doc.setdefault("providers", {})
+    if not isinstance(provs, dict):
+        provs = {}
+        doc["providers"] = provs
+
+    existing = provs.get(provider_name)
+    if isinstance(existing, dict):
+        merged = copy.deepcopy(existing)
+        merged["baseUrl"] = provider_cfg["baseUrl"]
+        merged.setdefault("api", provider_cfg.get("api", "openai-completions"))
+        merged.setdefault("apiKey", provider_cfg.get("apiKey", "none"))
+        if "compat" in provider_cfg:
+            merged["compat"] = {
+                **provider_cfg["compat"],
+                **(merged.get("compat") if isinstance(merged.get("compat"), dict) else {}),
+                **provider_cfg["compat"],
+            }
+        existing_models = list(merged.get("models") or [])
+        by_id = {m.get("id"): i for i, m in enumerate(existing_models) if isinstance(m, dict) and m.get("id")}
+        for new_m in provider_cfg.get("models", []):
+            mid = new_m.get("id")
+            if mid in by_id:
+                existing_models[by_id[mid]] = copy.deepcopy(new_m)
+            else:
+                existing_models.append(copy.deepcopy(new_m))
+        merged["models"] = existing_models
+        provs[provider_name] = merged
+    else:
+        provs[provider_name] = copy.deepcopy(provider_cfg)
+
+    atomic_write_json(pi_path, doc)
+
+
+def cmd_presets(as_json=False):
+    doc = load_json(presets_path())
+    presets = doc.get("presets", {})
+    if as_json:
+        print(json.dumps(presets, indent=2, ensure_ascii=False))
+        return
+    rows = []
+    for name, p in presets.items():
+        m = p["model"]
+        rows.append({
+            "preset": name,
+            "vessel": m["vessel"],
+            "thinking": m.get("thinking") or ("slot" if m.get("slot") else "-"),
+            "description": p.get("description", ""),
+        })
+    w = [max(len(str(r[k])) for r in rows + [{"preset": "preset", "vessel": "vessel", "thinking": "thinking"}]) for k in ("preset", "vessel", "thinking")]
+    print("%-*s  %-*s  %-*s  %s" % (w[0], "preset", w[1], "vessel", w[2], "thinking", "description"))
+    for r in rows:
+        print("%-*s  %-*s  %-*s  %s" % (w[0], r["preset"], w[1], r["vessel"], w[2], r["thinking"], r["description"]))
+
+
+def cmd_add(preset_name, url, custom_id=None, served_id=None, label=None, provider_override=None, force=False):
+    url = (url or "").strip().rstrip("/")
+    if not (url.startswith("http://") or url.startswith("https://")):
+        sys.exit("pulsar-models add: --url must start with http:// or https://")
+
+    presets_doc = load_json(presets_path())
+    presets = presets_doc.get("presets", {})
+    if preset_name not in presets:
+        known = ", ".join(sorted(presets))
+        sys.exit(f"pulsar-models add: unknown preset {preset_name!r} (available: {known})")
+
+    preset = presets[preset_name]
+    entry = copy.deepcopy(preset["model"])
+    if custom_id:
+        entry["id"] = custom_id
+    if label:
+        entry["label"] = label
+
+    reg_file = registry_path()
+    reg = load_json(reg_file)
+    models_list = reg.get("models", [])
+    existing_idx = next((i for i, m in enumerate(models_list) if m.get("id") == entry["id"]), None)
+    if existing_idx is not None and not force:
+        sys.exit(
+            f"pulsar-models add: model id {entry['id']!r} already exists in {reg_file} "
+            f"(pass --force to replace or --id for a different id)"
+        )
+
+    pi_updated = None
+    if "pi_provider" in preset:
+        pi_prov = copy.deepcopy(preset["pi_provider"])
+        prov_name = provider_override or pi_prov["name"]
+        prov_cfg = pi_prov["config"]
+        prov_cfg["baseUrl"] = url
+        _, _, default_served = entry["wire_model"].partition("/")
+        final_served = served_id or default_served
+        entry["wire_model"] = f"{prov_name}/{final_served}"
+        if prov_cfg.get("models"):
+            prov_cfg["models"][0]["id"] = final_served
+            if label:
+                prov_cfg["models"][0]["name"] = label
+        pi_file = pi_models_path()
+        _merge_pi_provider(pi_file, prov_name, prov_cfg)
+        pi_updated = (pi_file, prov_name, final_served)
+    else:
+        entry["base_url"] = url
+        if served_id and entry.get("vessel") == "codex":
+            entry["wire_model"] = served_id
+
+    if existing_idx is not None:
+        models_list[existing_idx] = entry
+    else:
+        models_list.append(entry)
+    reg["models"] = models_list
+    atomic_write_json(reg_file, reg)
+
+    print(f"Added {entry['id']!r} (vessel={entry['vessel']}) -> {url}")
+    print(f"  registry: {reg_file}")
+    if pi_updated:
+        print(f"  pi config: {pi_updated[0]} (provider {pi_updated[1]!r}, model {pi_updated[2]!r})")
+    print("Next steps:")
+    print(f"  1. Rebuild the web app: cd {os.path.join(REPO, 'web')} && ./scripts/build-live.sh")
+    print("  2. Restart Pulsar: systemctl --user restart pulsar-daemon.service pulsar-web.service")
+    if pi_updated:
+        print(f"  If your server needs an API key, set \"apiKey\" for provider {pi_updated[1]!r} in {pi_updated[0]}")
+
+
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == "presets":
+        ap = argparse.ArgumentParser(prog="pulsar-models presets")
+        ap.add_argument("--json", action="store_true")
+        a = ap.parse_args(argv[1:])
+        cmd_presets(as_json=a.json)
+        return
+    if argv and argv[0] == "add":
+        ap = argparse.ArgumentParser(prog="pulsar-models add")
+        ap.add_argument("preset", help="preset name from `pulsar-models presets`")
+        ap.add_argument("--url", required=True, help="OpenAI-compatible base URL (e.g. http://127.0.0.1:8000/v1)")
+        ap.add_argument("--id", dest="custom_id", default=None, help="override the Pulsar picker model id")
+        ap.add_argument("--served-id", default=None, help="override the served model id sent to the endpoint")
+        ap.add_argument("--label", default=None, help="override the picker display label")
+        ap.add_argument("--provider", default=None, help="override the Pi provider name")
+        ap.add_argument("--force", action="store_true", help="replace an existing entry with the same id")
+        a = ap.parse_args(argv[1:])
+        cmd_add(
+            a.preset, a.url,
+            custom_id=a.custom_id, served_id=a.served_id,
+            label=a.label, provider_override=a.provider, force=a.force,
+        )
+        return
+
+    ap = argparse.ArgumentParser(add_help=False)
+    ap.add_argument("--all", action="store_true")
+    ap.add_argument("--json", action="store_true")
+    ap.add_argument("--check", action="store_true")
+    ap.add_argument("-h", "--help", action="store_true")
+    a = ap.parse_args(argv)
+    if a.help:
+        print(__doc__.strip())
+        return
+    snap = snapshot(include_hidden=a.all)
+    if a.json:
+        print(json.dumps(snap, indent=1))
+    else:
+        print(table(snap))
+    if a.check:
+        bad = [r for r in snap["models"] if not r["cloud"] and not r["status"].startswith("LIVE")]
+        sys.exit(1 if bad else 0)
+
+
+if __name__ == "__main__":
+    main()

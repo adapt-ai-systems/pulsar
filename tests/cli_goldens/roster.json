@@ -1,0 +1,1709 @@
+{
+ "all": {
+  "argv": [
+   "--all"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\nbbbbbbbb2222 stopped pi glm Old Helper  [helper of aaaaaaaa]\ncccccccc3333 running codex gpt Spawned helper  [helper of dddddddd]\ndddddddd4444 stopped claude sonnet Archived one\neeeeeeee5555 ? ? ? ?\nffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\ngggggggg7777 running claude opus Plain (x)\n"
+ },
+ "bad-regex": {
+  "argv": [
+   "--grep",
+   "("
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: bad regex: missing ), unterminated subpattern at position 0\n",
+  "stdout": ""
+ },
+ "bad-regex-still-requests-first": {
+  "argv": [
+   "--grep",
+   "[a"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: bad regex: unterminated character set at position 0\n",
+  "stdout": ""
+ },
+ "bare-list-response": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   [
+    {
+     "id": "aaaaaaaa1111",
+     "model": "opus",
+     "state": "running",
+     "title": "Refactor lead",
+     "vessel": "claude"
+    },
+    {
+     "id": "bbbbbbbb2222",
+     "model": "glm",
+     "settings": {
+      "lead_id": "aaaaaaaa1111",
+      "role": "helper"
+     },
+     "state": "stopped",
+     "title": "Old Helper",
+     "vessel": "pi"
+    }
+   ]
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\nbbbbbbbb2222 stopped pi glm Old Helper  [helper of aaaaaaaa]\n"
+ },
+ "daemon-refused": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": null,
+  "requests": [],
+  "stderr": "pulsar-roster: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "default": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\nbbbbbbbb2222 stopped pi glm Old Helper  [helper of aaaaaaaa]\ncccccccc3333 running codex gpt Spawned helper  [helper of dddddddd]\neeeeeeee5555 ? ? ? ?\nffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\ngggggggg7777 running claude opus Plain (x)\n"
+ },
+ "empty-list": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": []
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": ""
+ },
+ "empty-list-json": {
+  "argv": [
+   "--json"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   []
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "[]\n"
+ },
+ "envelope-value-list": {
+  "argv": [
+   "--json"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "[{\"id\":\"aaaaaaaa1111\",\"state\":\"running\",\"vessel\":\"claude\",\"model\":\"opus\",\"title\":\"Refactor lead\"},{\"id\":\"bbbbbbbb2222\",\"state\":\"stopped\",\"vessel\":\"pi\",\"model\":\"glm\",\"title\":\"Old Helper\",\"role\":\"helper\",\"lead_id\":\"aaaaaaaa1111\"}]\n"
+ },
+ "grep-case-insensitive": {
+  "argv": [
+   "--grep",
+   "helper"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "bbbbbbbb2222 stopped pi glm Old Helper  [helper of aaaaaaaa]\ncccccccc3333 running codex gpt Spawned helper  [helper of dddddddd]\nffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\n"
+ },
+ "grep-empty-regex-matches-all": {
+  "argv": [
+   "--grep",
+   ""
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\nbbbbbbbb2222 stopped pi glm Old Helper  [helper of aaaaaaaa]\ncccccccc3333 running codex gpt Spawned helper  [helper of dddddddd]\neeeeeeee5555 ? ? ? ?\nffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\ngggggggg7777 running claude opus Plain (x)\n"
+ },
+ "grep-missing-regex": {
+  "argv": [
+   "--grep"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 2,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-roster: --grep needs a regex\n",
+  "stdout": ""
+ },
+ "grep-no-match": {
+  "argv": [
+   "--grep",
+   "zzz"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": ""
+ },
+ "grep-regex-anchor": {
+  "argv": [
+   "--grep",
+   "^plain"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "gggggggg7777 running claude opus Plain (x)\n"
+ },
+ "grep-unicode": {
+  "argv": [
+   "--grep",
+   "CAF\u00c9"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "ffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\n"
+ },
+ "grep-with-all": {
+  "argv": [
+   "--grep",
+   "arch",
+   "--all"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "dddddddd4444 stopped claude sonnet Archived one\n"
+ },
+ "help-flag": {
+  "argv": [
+   "--help"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-roster \u2014 one line per pulse, instead of pulling the 13.8KB /pulses\nJSON into your context.\n\n  pulsar-roster [--running] [--grep REGEX] [--json] [--all]\n\n    --running   only pulses whose state != stopped\n    --grep RE   only pulses whose title matches RE (case-insensitive)\n    --json      compact array of {id,state,vessel,model,title[,role,lead_id]} objects\n    --all       include archived pulses (default hides them)\n"
+ },
+ "help-short": {
+  "argv": [
+   "-h"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-roster \u2014 one line per pulse, instead of pulling the 13.8KB /pulses\nJSON into your context.\n\n  pulsar-roster [--running] [--grep REGEX] [--json] [--all]\n\n    --running   only pulses whose state != stopped\n    --grep RE   only pulses whose title matches RE (case-insensitive)\n    --json      compact array of {id,state,vessel,model,title[,role,lead_id]} objects\n    --all       include archived pulses (default hides them)\n"
+ },
+ "help-wins-over-earlier-flags": {
+  "argv": [
+   "--json",
+   "--help"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-roster \u2014 one line per pulse, instead of pulling the 13.8KB /pulses\nJSON into your context.\n\n  pulsar-roster [--running] [--grep REGEX] [--json] [--all]\n\n    --running   only pulses whose state != stopped\n    --grep RE   only pulses whose title matches RE (case-insensitive)\n    --json      compact array of {id,state,vessel,model,title[,role,lead_id]} objects\n    --all       include archived pulses (default hides them)\n"
+ },
+ "help-word": {
+  "argv": [
+   "help"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "",
+  "stdout": "pulsar-roster \u2014 one line per pulse, instead of pulling the 13.8KB /pulses\nJSON into your context.\n\n  pulsar-roster [--running] [--grep REGEX] [--json] [--all]\n\n    --running   only pulses whose state != stopped\n    --grep RE   only pulses whose title matches RE (case-insensitive)\n    --json      compact array of {id,state,vessel,model,title[,role,lead_id]} objects\n    --all       include archived pulses (default hides them)\n"
+ },
+ "json": {
+  "argv": [
+   "--json"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "[{\"id\":\"aaaaaaaa1111\",\"state\":\"running\",\"vessel\":\"claude\",\"model\":\"opus\",\"title\":\"Refactor lead\"},{\"id\":\"bbbbbbbb2222\",\"state\":\"stopped\",\"vessel\":\"pi\",\"model\":\"glm\",\"title\":\"Old Helper\",\"role\":\"helper\",\"lead_id\":\"aaaaaaaa1111\"},{\"id\":\"cccccccc3333\",\"state\":\"running\",\"vessel\":\"codex\",\"model\":\"gpt\",\"title\":\"Spawned helper\",\"role\":\"helper\",\"lead_id\":\"dddddddd4444eeee\"},{\"id\":\"eeeeeeee5555\",\"state\":\"?\",\"vessel\":\"?\",\"model\":\"?\",\"title\":\"?\"},{\"id\":\"ffffffff6666\",\"state\":\"waiting\",\"vessel\":\"pi\",\"model\":\"qwen\",\"title\":\"caf\\u00e9 Helper-ish\",\"role\":\"helper\",\"lead_id\":\"\"},{\"id\":\"gggggggg7777\",\"state\":\"running\",\"vessel\":\"claude\",\"model\":\"opus\",\"title\":\"Plain (x)\"}]\n"
+ },
+ "json-all-running-grep": {
+  "argv": [
+   "--json",
+   "--all",
+   "--running",
+   "--grep",
+   "e"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "[{\"id\":\"aaaaaaaa1111\",\"state\":\"running\",\"vessel\":\"claude\",\"model\":\"opus\",\"title\":\"Refactor lead\"},{\"id\":\"cccccccc3333\",\"state\":\"running\",\"vessel\":\"codex\",\"model\":\"gpt\",\"title\":\"Spawned helper\",\"role\":\"helper\",\"lead_id\":\"dddddddd4444eeee\"},{\"id\":\"ffffffff6666\",\"state\":\"waiting\",\"vessel\":\"pi\",\"model\":\"qwen\",\"title\":\"caf\\u00e9 Helper-ish\",\"role\":\"helper\",\"lead_id\":\"\"}]\n"
+ },
+ "positional-is-unknown": {
+  "argv": [
+   "x"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-roster: unknown flag 'x'\n",
+  "stdout": "pulsar-roster \u2014 one line per pulse, instead of pulling the 13.8KB /pulses\nJSON into your context.\n\n  pulsar-roster [--running] [--grep REGEX] [--json] [--all]\n\n    --running   only pulses whose state != stopped\n    --grep RE   only pulses whose title matches RE (case-insensitive)\n    --json      compact array of {id,state,vessel,model,title[,role,lead_id]} objects\n    --all       include archived pulses (default hides them)\n"
+ },
+ "reply-200-dict-without-value": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: unexpected response shape\n",
+  "stdout": ""
+ },
+ "reply-200-non-dict-pulse": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   [
+    1
+   ]
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "<TRACEBACK>\n",
+  "stdout": ""
+ },
+ "reply-200-not-json": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   "<html>nope</html>"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: bad response: Expecting value: line 1 column 1 (char 0)\n",
+  "stdout": ""
+ },
+ "reply-200-string-json": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   "\"x\""
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: unexpected response shape\n",
+  "stdout": ""
+ },
+ "reply-200-value-not-list": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "value": "x"
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: unexpected response shape\n",
+  "stdout": ""
+ },
+ "reply-201-accepted": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   201,
+   [
+    {
+     "id": "aaaaaaaa1111",
+     "model": "opus",
+     "state": "running",
+     "title": "Refactor lead",
+     "vessel": "claude"
+    }
+   ]
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\n"
+ },
+ "reply-204-empty-is-bad-response": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   204,
+   ""
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: bad response: Expecting value: line 1 column 1 (char 0)\n",
+  "stdout": ""
+ },
+ "reply-404": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   404,
+   {
+    "error": {
+     "message": "no"
+    },
+    "ok": false
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "reply-500-text": {
+  "argv": [],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   500,
+   "boom"
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "pulsar-roster: cannot reach the daemon at <DAEMON>\n",
+  "stdout": ""
+ },
+ "running": {
+  "argv": [
+   "--running"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\ncccccccc3333 running codex gpt Spawned helper  [helper of dddddddd]\neeeeeeee5555 ? ? ? ?\nffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\ngggggggg7777 running claude opus Plain (x)\n"
+ },
+ "running-all": {
+  "argv": [
+   "--running",
+   "--all"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 0,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": [
+     {
+      "id": "aaaaaaaa1111",
+      "model": "opus",
+      "state": "running",
+      "title": "Refactor lead",
+      "vessel": "claude"
+     },
+     {
+      "id": "bbbbbbbb2222",
+      "model": "glm",
+      "settings": {
+       "lead_id": "aaaaaaaa1111",
+       "role": "helper"
+      },
+      "state": "stopped",
+      "title": "Old Helper",
+      "vessel": "pi"
+     },
+     {
+      "id": "cccccccc3333",
+      "model": "gpt",
+      "settings": {
+       "role": "helper",
+       "spawned_by": "dddddddd4444eeee"
+      },
+      "state": "running",
+      "title": "Spawned helper",
+      "vessel": "codex"
+     },
+     {
+      "archived_at": "2026-10-01T00:00:00",
+      "id": "dddddddd4444",
+      "model": "sonnet",
+      "state": "stopped",
+      "title": "Archived one",
+      "vessel": "claude"
+     },
+     {
+      "id": "eeeeeeee5555",
+      "state": null,
+      "title": null
+     },
+     {
+      "id": "ffffffff6666",
+      "model": "qwen",
+      "settings": {
+       "role": "helper"
+      },
+      "state": "waiting",
+      "title": "caf\u00e9 Helper-ish",
+      "vessel": "pi"
+     },
+     {
+      "id": "gggggggg7777",
+      "model": "opus",
+      "settings": {
+       "role": "lead"
+      },
+      "state": "running",
+      "title": "Plain (x)",
+      "vessel": "claude"
+     }
+    ]
+   }
+  ],
+  "requests": [
+   {
+    "body": null,
+    "content_type": null,
+    "method": "GET",
+    "path": "/pulses"
+   }
+  ],
+  "stderr": "",
+  "stdout": "aaaaaaaa1111 running claude opus Refactor lead\ncccccccc3333 running codex gpt Spawned helper  [helper of dddddddd]\neeeeeeee5555 ? ? ? ?\nffffffff6666 waiting pi qwen caf\u00e9 Helper-ish  [helper of ]\ngggggggg7777 running claude opus Plain (x)\n"
+ },
+ "unknown-flag": {
+  "argv": [
+   "--wat"
+  ],
+  "cwd": "plain",
+  "env": {},
+  "exit": 1,
+  "reply": [
+   200,
+   {
+    "ok": true,
+    "value": {}
+   }
+  ],
+  "requests": [],
+  "stderr": "pulsar-roster: unknown flag '--wat'\n",
+  "stdout": "pulsar-roster \u2014 one line per pulse, instead of pulling the 13.8KB /pulses\nJSON into your context.\n\n  pulsar-roster [--running] [--grep REGEX] [--json] [--all]\n\n    --running   only pulses whose state != stopped\n    --grep RE   only pulses whose title matches RE (case-insensitive)\n    --json      compact array of {id,state,vessel,model,title[,role,lead_id]} objects\n    --all       include archived pulses (default hides them)\n"
+ }
+}

@@ -1,0 +1,8 @@
+# Development dependencies for Pulsar: the runtime pins plus the test runner.
+# ./dev-setup.sh installs this file. ./ci.sh needs it.
+-r requirements.txt
+iniconfig==2.3.0
+packaging==26.3
+pluggy==1.6.0
+pygments==2.21.0
+pytest==9.1.1

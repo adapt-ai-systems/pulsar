@@ -1,0 +1,18 @@
+# A change to one of these paths needs a review by a maintainer.
+# Keep this list in step with "Files that need a maintainer review" in AGENTS.md.
+
+/.github/                    @adapt-ai-systems
+/ci.sh                       @adapt-ai-systems
+/dev-setup.sh                @adapt-ai-systems
+/install.sh                  @adapt-ai-systems
+/requirements.txt            @adapt-ai-systems
+/requirements-dev.txt        @adapt-ai-systems
+/pyproject.toml              @adapt-ai-systems
+/web/package.json            @adapt-ai-systems
+/web/pnpm-lock.yaml          @adapt-ai-systems
+/SECURITY.md                 @adapt-ai-systems
+/LICENSE                     @adapt-ai-systems
+/NOTICE                      @adapt-ai-systems
+/pulsar/cli/guard.py         @adapt-ai-systems
+/ops/guard-bin/              @adapt-ai-systems
+/pulsar/daemon/security.py   @adapt-ai-systems

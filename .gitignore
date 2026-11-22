@@ -1,0 +1,12 @@
+data/
+venv/
+__pycache__/
+*.pyc
+.venv/
+.env
+pulsar.egg-info/
+*.db
+*.log*
+node_modules/
+web/build/
+web/.svelte-kit/

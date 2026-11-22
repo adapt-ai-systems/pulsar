@@ -1,0 +1,6 @@
+#!/bin/sh
+# pulsar-guard PATH shim: every pulse runner puts this dir first on PATH,
+# so this runs for any vessel before the real rmdir does.
+# Refused -> exit 2 with the reason on stderr. Rules: pulsar/cli/guard.py.
+"$(dirname "$0")/../bin/pulsar-guard" argv rmdir "$@" || exit $?
+if [ -x /usr/bin/rmdir ]; then exec /usr/bin/rmdir "$@"; else exec /bin/rmdir "$@"; fi

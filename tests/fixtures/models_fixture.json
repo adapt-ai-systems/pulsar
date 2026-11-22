@@ -1,0 +1,765 @@
+{
+  "_doc": "Test fixture model registry (full model set with scrubbed labels and RFC 5737 addresses). Loaded during pytest via PULSAR_MODELS_PATH.",
+  "default_model": "claude-opus-5-5",
+  "default_effort": "medium",
+  "vessels": {
+    "claude-code": {
+      "label": "Claude",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "fast": false
+    },
+    "codex": {
+      "label": "Codex",
+      "efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "fast": true
+    },
+    "grok": {
+      "label": "Grok",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "fast": false
+    },
+    "pi": {
+      "label": "Pi",
+      "efforts": [],
+      "fast": false
+    },
+    "antigravity": {
+      "label": "Antigravity",
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "fast": false
+    }
+  },
+  "models": [
+    {
+      "id": "claude-opus-5-5",
+      "label": "Opus 5.5",
+      "vessel": "claude-code",
+      "local": false,
+      "default_effort": "low",
+      "default_handoff": 300000
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "label": "Sonnet 5.5",
+      "vessel": "claude-code",
+      "local": false,
+      "default_handoff": 200000
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "label": "Haiku 5.5",
+      "vessel": "claude-code",
+      "local": false,
+      "default_handoff": 200000
+    },
+    {
+      "id": "claude-opus-5",
+      "label": "Opus 5",
+      "vessel": "claude-code",
+      "local": false,
+      "default_effort": "low",
+      "default_handoff": 300000
+    },
+    {
+      "id": "claude-fable-5-2",
+      "label": "Fable 5.2",
+      "vessel": "claude-code",
+      "local": false,
+      "default_handoff": 200000
+    },
+    {
+      "id": "claude-fable-5-1",
+      "label": "Fable 5.1",
+      "vessel": "claude-code",
+      "local": false,
+      "default_handoff": 200000,
+      "hidden": true
+    },
+    {
+      "id": "claude-fable-5",
+      "label": "Fable 5",
+      "vessel": "claude-code",
+      "local": false,
+      "default_handoff": 200000,
+      "hidden": true
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "label": "GPT-5.6 Sol",
+      "vessel": "codex",
+      "local": false,
+      "default_handoff": 225000,
+      "hidden": true
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "label": "GPT-5.6 Luna",
+      "vessel": "codex",
+      "local": false,
+      "default_handoff": 225000,
+      "hidden": true
+    },
+    {
+      "id": "gpt-6.2-astra",
+      "label": "GPT-6.2 Astra",
+      "vessel": "codex",
+      "local": false,
+      "default_handoff": 225000
+    },
+    {
+      "id": "gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "vessel": "codex",
+      "local": false,
+      "default_handoff": 225000,
+      "hidden": true
+    },
+    {
+      "id": "gpt-6-sol",
+      "label": "GPT-6 Sol",
+      "vessel": "codex",
+      "local": false,
+      "default_handoff": 225000
+    },
+    {
+      "id": "gpt-6-luna",
+      "label": "GPT-6 Luna",
+      "vessel": "codex",
+      "local": false,
+      "default_handoff": 225000
+    },
+    {
+      "id": "codex-ds4-flash",
+      "label": "DS4 Flash pair (codex)",
+      "vessel": "codex",
+      "local": true,
+      "prompt_notes": [
+        "ds4_clarity"
+      ],
+      "default_handoff": 175000,
+      "hidden": true,
+      "base_url": "http://192.0.2.10:8000/v1"
+    },
+    {
+      "id": "pi-qwen38-flash",
+      "hidden": true,
+      "label": "Qwen 3.8 Flash (TP2 pair)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 175000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default_effort": "low",
+      "wire_model": "glmlocal/Qwen3.8-Flash-Next-NVFP4",
+      "pi_rpc": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-tuned-flash",
+      "label": "Q-Tuned",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 200000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default_effort": "low",
+      "wire_model": "tunedlocal/tuned",
+      "pi_rpc": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-tuned-flash-abliterated",
+      "label": "Q-Tuned abl",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 200000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default_effort": "low",
+      "wire_model": "tunedlocal/tuned-abliterated",
+      "pi_rpc": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-tuned-flash-dual",
+      "label": "Q-Tuned dual",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 200000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default_effort": "low",
+      "wire_model": "tunedlocal/tuned-dual",
+      "pi_rpc": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-argo03-4b",
+      "hidden": true,
+      "label": "Argo0.3 4B (local llama.cpp)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 48000,
+      "efforts": [
+        "off"
+      ],
+      "default_effort": "off",
+      "wire_model": "argolocal/argo0.3-4b",
+      "pi_rpc": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-qwen38-flash-tp4",
+      "label": "Qwen 3.8 Flash (TP4)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 175000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "wire_model": "qwen38tp4/Qwen3.8-Flash-Next-NVFP4",
+      "pi_rpc": true,
+      "hidden": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-qwen35-interface",
+      "label": "OMP Interface — Qwen 35B",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 100000,
+      "wire_model": "localqwen/qwen3.6-35b-a3b-fast",
+      "pi_rpc": true,
+      "interface": true,
+      "hidden": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-v4-flash-b",
+      "label": "V4 Flash Vision (TP4)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 250000,
+      "wire_model": "dspair/deepseek-v4-flash",
+      "hidden": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-v4-flash",
+      "label": "V4 Flash (legacy pi id)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 250000,
+      "wire_model": "dspair/deepseek-v4-flash",
+      "hidden": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-glm53-full",
+      "label": "GLM F",
+      "vessel": "pi",
+      "local": true,
+      "max_concurrent": 2,
+      "prompt_notes": [
+        "vision"
+      ],
+      "default_handoff": 300000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "glm53local/glm-5.3",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-glm53-flash-tp2",
+      "label": "GLM F Flash",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 150000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "glm53flashtp2/glm-5.3",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-glm-flash",
+      "hidden": true,
+      "label": "GLM 5.3 Flash (TP4, official or uncensored)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 150000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "low",
+      "wire_model": "glm53local/glm-5.3-flash",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-qwen-swarm",
+      "label": "Qwen 3.8 Flash swarm (NVFP4)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 175000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default_effort": "low",
+      "wire_model": "qwenswarm/Qwen3.8-Flash-Next-NVFP4",
+      "pi_rpc": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-glm53-flash-exlr8",
+      "label": "GLM 5.3 Flash exlr8 (TP2 · 160K)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 120000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "low",
+      "wire_model": "glm53flashexlr8/glm53",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-alt-glm53-flash-tp4",
+      "label": "GLM 5.3 Flash (TP4 · 8 sessions · 2M ctx)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 300000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "altglmflash/glm53",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-alt-glm53-full-tp4",
+      "label": "GLM 5.3 full (TP4 · 8 sessions)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 300000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "altglmfull/glm53",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-glm-exl3-uncensored-tp4",
+      "label": "GLM 5.3 Flash EXL3 Uncensored (TP4)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 225000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "glm53exl3tp4uncensored/GLM-5.3-Flash-EXL3-Uncensored",
+      "pi_rpc": true,
+      "hidden": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-glm-exl3-tp4",
+      "label": "GLM 5.3 Flash EXL3 (TP4)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 225000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "glm53exl3tp4/GLM-5.3-Flash-EXL3",
+      "pi_rpc": true,
+      "hidden": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-glm53-flash2",
+      "hidden": true,
+      "label": "GLM 5.3 Flash TensorFold (TP2)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 225000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "glm53flash2local/GLM-5.3-Flash-EXL3",
+      "pi_rpc": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-ds41-flash",
+      "hidden": true,
+      "label": "DeepSeek V4.1 Flash (TP4 ring · 1M ctx)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 250000,
+      "efforts": [
+        "80",
+        "70",
+        "50",
+        "30",
+        "none"
+      ],
+      "effort_aliases": {
+        "off": "none",
+        "low": "50",
+        "high": "80",
+        "xhigh": "80",
+        "max": "80"
+      },
+      "default_effort": "none",
+      "wire_model": "ds41local/deepseek-v4.1-flash",
+      "pi_rpc": true,
+      "thinking": "ds41"
+    },
+    {
+      "id": "pi-alt-ds41",
+      "label": "DeepSeek V4.1 Flash (TP4)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 250000,
+      "efforts": [
+        "80",
+        "70",
+        "50",
+        "30",
+        "none"
+      ],
+      "effort_aliases": {
+        "off": "none",
+        "low": "50",
+        "high": "80",
+        "xhigh": "80",
+        "max": "80"
+      },
+      "default_effort": "none",
+      "wire_model": "altds/deepseek-v4.1-flash",
+      "pi_rpc": true,
+      "thinking": "ds41"
+    },
+    {
+      "id": "pi-glm-uncensored",
+      "label": "GLM 5.3 Flash uncensored (TP2 pair)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 225000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "wire_model": "glm53pair/glm-5.3-flash-nvfp4",
+      "hidden": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "pi-glm-52",
+      "label": "GLM 5.2 (local)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 170000,
+      "efforts": [
+        "off",
+        "high",
+        "max"
+      ],
+      "wire_model": "glmlocal/glm-5.2",
+      "pi_rpc": true,
+      "hidden": true,
+      "thinking": "glm52"
+    },
+    {
+      "id": "pi-glm-53",
+      "label": "GLM 5.3 (Z.ai cloud)",
+      "vessel": "pi",
+      "local": false,
+      "prompt_notes": [
+        "vision"
+      ],
+      "default_handoff": 250000,
+      "wire_model": "zai/glm-5.3",
+      "pi_rpc": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-nemo",
+      "label": "Nemo — Nemotron 3.5 Lightning (local)",
+      "vessel": "pi",
+      "local": true,
+      "prompt_notes": [
+        "vision"
+      ],
+      "default_handoff": 175000,
+      "hidden": true,
+      "wire_model": "nemolocal/nemotron3.5-lightning",
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-nex-mini",
+      "label": "Nex — N2.5-mini Int4 (local)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 175000,
+      "hidden": true,
+      "wire_model": "nexlocal/nex-n2.5-mini",
+      "thinking": "passthrough"
+    },
+    {
+      "id": "agy-gemini-4-neon",
+      "label": "Gemini 4 Neon (Antigravity)",
+      "vessel": "antigravity",
+      "local": false,
+      "default_handoff": 300000,
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ]
+    },
+    {
+      "id": "agy-gemini-4-carbon",
+      "label": "Gemini 4 Carbon (Antigravity)",
+      "vessel": "antigravity",
+      "local": false,
+      "default_handoff": 300000
+    },
+    {
+      "id": "agy-gemini-4-argon",
+      "label": "Gemini 4 Argon (Antigravity)",
+      "vessel": "antigravity",
+      "local": false,
+      "default_handoff": 300000
+    },
+    {
+      "id": "agy-gemini-3.8-flash",
+      "label": "Gemini 3.8 Flash (Antigravity)",
+      "vessel": "antigravity",
+      "local": false,
+      "default_handoff": 300000
+    },
+    {
+      "id": "agy-claude-opus-5-5",
+      "label": "Opus 5.5 (Antigravity)",
+      "vessel": "antigravity",
+      "local": false,
+      "default_handoff": 300000
+    },
+    {
+      "id": "grok-4.7",
+      "label": "Grok 4.7",
+      "vessel": "grok",
+      "local": false,
+      "default_handoff": 300000
+    },
+    {
+      "id": "grok-4.7-build-fast",
+      "label": "Grok 4.7 Fast",
+      "vessel": "grok",
+      "local": false,
+      "default_handoff": 300000
+    },
+    {
+      "id": "grok-4.6",
+      "label": "Grok 4.6",
+      "vessel": "grok",
+      "local": false,
+      "default_handoff": 300000,
+      "default_effort": "low"
+    },
+    {
+      "id": "pi-grok46",
+      "label": "Grok 4.6 (Pi · OpenRouter)",
+      "vessel": "pi",
+      "local": false,
+      "prompt_notes": [
+        "vision"
+      ],
+      "default_handoff": 200000,
+      "wire_model": "openrouter/x-ai/grok-4.6",
+      "hidden": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-qwen27-interface",
+      "label": "Qwen 3.8 27B (local · interface)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 100000,
+      "wire_model": "localqwen/qwen3.8-27b",
+      "pi_rpc": true,
+      "interface": true,
+      "hidden": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-qwen27",
+      "hidden": true,
+      "label": "Qwen 3.8 27B EXL3 (Pi · local)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 100000,
+      "efforts": [
+        "off",
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "wire_model": "localqwen/qwen3.8-27b",
+      "pi_rpc": true,
+      "thinking": "qwen38"
+    },
+    {
+      "id": "pi-v4-flash-tp2",
+      "label": "V4 Flash Vision (TP2 pair)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 250000,
+      "wire_model": "dspair2/deepseek-v4-flash",
+      "hidden": true,
+      "thinking": "passthrough"
+    },
+    {
+      "id": "pi-glm-exl3",
+      "label": "GLM 5.3 Flash EXL3 (TP2 pair)",
+      "vessel": "pi",
+      "local": true,
+      "default_handoff": 225000,
+      "efforts": [
+        "off",
+        "low",
+        "high",
+        "max"
+      ],
+      "default_effort": "high",
+      "wire_model": "glm53exl3/GLM-5.3-Flash-EXL3",
+      "pi_rpc": true,
+      "hidden": true,
+      "thinking": "glm"
+    },
+    {
+      "id": "gpu-ring",
+      "hidden": true,
+      "label": "Local ring (TP4)",
+      "vessel": "pi",
+      "local": true,
+      "slot": true,
+      "base_url": "http://192.0.2.10:8000/v1",
+      "default_handoff": 190000,
+      "base_urls": [
+        "http://192.0.2.10:8888/v1"
+      ]
+    },
+    {
+      "id": "gpu-pair",
+      "hidden": true,
+      "label": "Local pair (TP2)",
+      "vessel": "pi",
+      "local": true,
+      "slot": true,
+      "base_url": "http://192.0.2.11:8888/v1",
+      "default_handoff": 190000,
+      "base_urls": [
+        "http://192.0.2.11:8000/v1"
+      ]
+    },
+    {
+      "id": "gpu-local",
+      "hidden": true,
+      "label": "Local GPU",
+      "vessel": "pi",
+      "local": true,
+      "slot": true,
+      "base_url": "http://192.0.2.14:8888/v1",
+      "default_handoff": 190000
+    }
+  ]
+}

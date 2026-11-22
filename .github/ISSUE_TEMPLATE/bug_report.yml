@@ -1,0 +1,62 @@
+name: Bug report
+description: Something in Pulsar does not work as the README or the UI says.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a security problem, do not open an issue. See SECURITY.md.
+        For help with the install, use the "Setup help" form.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what Pulsar did.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The exact steps on the current main branch. Add the commands and the output.
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Pulsar commit
+      description: The output of `git rev-parse --short HEAD` in your Pulsar clone.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Linux distribution and version
+      placeholder: Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: Agent tool and model
+      description: Which agent tool (Claude Code, Codex, pi, Antigravity, Grok) and which model the pulse used, if the bug is about a pulse.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Output of `journalctl --user -u pulsar-daemon.service -n 100 --no-pager`, or the browser console. Remove tokens and private paths first.
+      render: text
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you send
+      options:
+        - label: I searched the open and closed issues for the same bug.
+          required: true

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- maximum-scale=1 stops iOS input-focus auto-zoom (pinch zoom still
+       works on iOS regardless); interactive-widget keeps the layout inside
+       the visual viewport when the keyboard opens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#0f131e" />
+  <link rel="icon" href="/app-icon.png" />
+  <link rel="apple-touch-icon" href="/app-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Pulsar</title>
+  %sveltekit.head%
+</head>
+<body data-sveltekit-preload-data="hover">
+  <div style="display: contents">%sveltekit.body%</div>
+</body>
+</html>

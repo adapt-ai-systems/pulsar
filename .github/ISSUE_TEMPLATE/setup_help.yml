@@ -1,0 +1,38 @@
+name: Setup help
+description: The install or the first run did not work.
+labels: ["setup"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Pulsar runs on Linux only. On macOS or Windows, run it inside a Linux virtual machine.
+        An AI agent can do the install with you: see "Install with an AI agent" in the README.
+  - type: input
+    id: os
+    attributes:
+      label: Linux distribution and version
+      placeholder: Ubuntu 24.04
+    validations:
+      required: true
+  - type: textarea
+    id: step
+    attributes:
+      label: The step that failed
+      description: The command you ran (for example `./install.sh`) and where it stopped.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The full output of the command. Remove tokens and private paths first.
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: Agent tool
+      description: Which agent tool you want to use with Pulsar (Claude Code, Codex, pi, Antigravity, Grok).
+    validations:
+      required: false

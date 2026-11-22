@@ -1,0 +1,193 @@
+/* Pulsar — global theme tokens.
+   ALL colors flow through CSS custom properties on :root (flat token->color map).
+   Default = Adapt Dark (matches Logo 7A). Later milestones swap this map for theme profiles. */
+:root {
+  --bg: #0f131e;
+  --page: #0b0e17;
+  --surface: #161b29;
+  --surface-warm: #1e2536;
+  --border: #283146;
+  --border-strong: #3b4762;
+  --ink: #f1f4f9;
+  --ink-dim: #b0bccb;
+  --ink-meta: #7a879b;
+  --dreamer: #f46b2a; /* assistant / adapt signal orange */
+  --user: #6fb1f7;    /* you / steel blue */
+  --sprite: #3fd896;  /* live / emerald */
+  --bad: #ff5568;     /* error / coral-crimson */
+  --lantern: #f5b841;
+  --matron: #f5b841;
+  --warden: #a78bfa;
+  --peer: #a78bfa;   /* messages from other pulses (theme.js derives from --warden) */
+  /* Chat bubble washes (theme.js applyMsg): base color + % strength each.
+     Defaults mirror the pre-token look: voice colors at 7/6/8 percent. */
+  --bub-you: #6fb1f7;
+  --bub-you-fill: 7%;
+  --bub-reply: #f46b2a;
+  /* 6% -> 10%: reply-first emphasis. theme.js MSG_NUMS fallback tracks this so
+     the Appearance slider and the CSS default agree. */
+  --bub-reply-fill: 10%;
+  --bub-peer: #a78bfa;
+  --bub-peer-fill: 8%;
+  /* Text size multipliers. Every font-size in the app is
+     calc(<base>px * var(--tscale-*)), so these three scale the whole UI without
+     touching layout metrics. Base sizes stay in the components — these only
+     ever multiply, so 1 is byte-identical to the original design.
+       chat = message bodies + rendered markdown (the text you read)
+       tool = the grey tool/activity lines inside a pane
+       ui   = all chrome: nav, headers, chips, drawers, modals, composer */
+  --tscale-chat: 1;
+  --tscale-tool: 1;
+  --tscale-ui: 1;
+  /* Widest a single chat column is allowed to get. Past this the desktop grid
+     stops stretching and centres itself, so 1-2 panes on an ultrawide stay a
+     readable measure instead of running the full monitor. */
+  --col-max: 1000px;
+  --font-sans: -apple-system, "SF Pro Text", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, "New York", Georgia, Cambria, serif;
+  --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
+}
+
+/* Appearance change feedback: a ~2s highlight ring on the elements an option
+   just touched (ThemeModal adds/removes .ap-flash). outline+outline-offset so
+   the ring sits OUTSIDE the element and never shifts layout; !important so it
+   reads over the work-glow halo. */
+.ap-flash {
+  outline: 2px solid var(--dreamer) !important;
+  outline-offset: 3px;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--dreamer) 55%, transparent);
+  transition: outline-color 1.4s ease-out, box-shadow 1.4s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ap-flash { transition: none; }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+/* The app shell owns the viewport: the document itself never scrolls, so the
+   ONLY vertical scroller left is the chat log inside a pane. Without this
+   the mobile page was a scroller in its own right — see the 100dvh note on
+   .desktop-app — and every near-vertical drag panned the whole deck.
+   overscroll-behavior kills the rubber-band bounce at the ends. */
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  /* High-DPI displays: light text on dark surfaces renders heavy and fuzzy
+     under subpixel smoothing; grayscale AA keeps text crisp. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  /* Eliminate iOS's compatibility-tap delay on controls. The mobile deck
+     keeps pan-y on its gesture surface, while an actual button tap should be
+     dispatched immediately rather than waiting on double-tap zoom. */
+  touch-action: manipulation;
+}
+input, select, textarea { font: inherit; color: var(--ink); }
+
+/* Background-image overlay. When a theme profile sets a background
+   image, the .app container carries the .has-bg class (set by theme.js). The
+   chrome goes translucent so the image reads through while text stays legible.
+   Global so it reaches component-scoped children (.pane/.composer in ChatPane). */
+.app.has-bg { background-size: cover; background-position: 50% 50%; background-repeat: no-repeat; }
+.app.has-bg .grid-body { background: transparent; }
+.app.has-bg .nav { background: color-mix(in srgb, var(--bg) 52%, transparent); }
+/* Chrome washes over a bg image use the --bg-wash veil (set by theme.js from
+   the background-opacity slider). Higher opacity = thinner veil = the image
+   shows through more clearly. Default 50% -> 50% veil, text stays legible. */
+.app.has-bg .pane { background: color-mix(in srgb, var(--bg) var(--bg-wash, 50%), transparent); }
+/* The main chat field reads the background image through the page colour so
+   the image sits behind the text. The wash keeps the reading surface legible. */
+.app.has-bg .chat { background: color-mix(in srgb, var(--page) var(--bg-wash, 50%), transparent); }
+.app.has-bg .composer { background: color-mix(in srgb, var(--surface) var(--bg-wash, 50%), transparent); }
+
+/* Inbox surface: the Inbox list/detail panes go translucent over
+   a background image exactly like .pane — same 72% wash so text stays legible
+   while the image reads through. Global so it beats the component-scoped
+   {background} on .listpane/.detailpane, mirroring the .pane precedent. */
+.app.has-bg .inbox-surface { background: transparent; }
+.app.has-bg .listpane { background: color-mix(in srgb, var(--bg) var(--bg-wash, 50%), transparent); }
+.app.has-bg .detailpane { background: color-mix(in srgb, var(--page) var(--bg-wash, 50%), transparent); }
+/* Below the Inbox breakpoint the detailpane is a fixed overlay ON TOP of the
+   list — translucency there reads the list's text through the pane, so the
+   overlay goes fully opaque. Must follow the base .has-bg rule above to win
+   the cascade. */
+@media (max-width: 820px) {
+  .app.has-bg .detailpane { background: var(--page); }
+}
+
+/* iOS Safari auto-zooms the page when a focused control's font is under 16px.
+   On touch devices every text control renders at 16px; desktop keeps the
+   compact type. !important on purpose: it must beat the component-scoped
+   10-13px sizes in every modal/composer. */
+@media (pointer: coarse) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+  /* The composer follows the "chat" text scale instead. Focus-zoom is already
+     blocked by the viewport meta's maximum-scale=1, so 16px is not needed here. */
+  .composer .ta-wrap textarea {
+    font-size: calc(16px * var(--tscale-chat, 1)) !important;
+  }
+}
+
+/* Working glow: animate opacity of a static-shadow overlay instead of
+   box-shadow (which forces a 60Hz paint on every busy pane). Shared by
+   ChatPane, GridTabs chips, and Wall cards. */
+@keyframes work-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.22; }
+}
+.work-glow {
+  position: relative;
+}
+.work-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 var(--work-ring, 3px) var(--work-halo-color, var(--work-color, var(--dreamer))),
+    0 0 var(--work-halo, 24px) color-mix(in srgb, var(--work-halo-color, var(--work-color, var(--dreamer))) var(--work-glow, 60%), transparent);
+  animation: work-glow var(--work-speed, 0.9s) ease-in-out infinite;
+  z-index: 4;
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-glow::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* The ghost that follows the finger during a hold-to-drag (Wall, drawer,
+   full-screen window; longpress.svelte.js). */
+.drag-ghost {
+  position: fixed;
+  z-index: 90;
+  transform: translate(-50%, -140%);
+  pointer-events: none;
+  max-width: 70vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 7px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--sprite);
+  background: color-mix(in srgb, var(--surface) 92%, var(--sprite));
+  color: var(--ink);
+  font-size: calc(12px * var(--tscale-ui));
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.5);
+}
+.drag-ghost.ws {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}

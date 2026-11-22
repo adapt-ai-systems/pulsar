@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/adapt-ai-systems/pulsar/discussions
+    about: Ask a question or talk about an idea in GitHub Discussions.
+  - name: Security problem
+    url: https://github.com/adapt-ai-systems/pulsar/security
+    about: Do not open an issue. Report it in private (see SECURITY.md).

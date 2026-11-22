@@ -1,0 +1,124 @@
+#!/bin/bash
+# pulsar-search — the ONE way a pulse finds files on this box.
+#
+#   pulsar-search file <name>  [--in DIR] [--limit N]   find a file by name (indexed, ms)
+#   pulsar-search text <regex> [DIR] [--all] [--no-ignore]   search file contents in DIR (default: cwd)
+#
+# Why: models used to run `find /` and `grep -r /`, which walk the whole
+# filesystem and take minutes. This wrapper routes name lookups to the plocate
+# index and content searches to ripgrep, with hard timeouts, an output cap,
+# and a footer that says how many hits there were and whether it truncated.
+set -u
+
+LIMIT=200
+FILE_TIMEOUT=20
+TEXT_TIMEOUT=60
+ALL_TIMEOUT=180
+INDEX_DB=/var/lib/plocate/plocate.db
+
+usage() {
+  sed -n '2,5p' "$0" | sed 's/^# \{0,1\}//'
+  exit "${1:-0}"
+}
+
+need() {
+  command -v "$1" >/dev/null 2>&1 && return 0
+  echo "pulsar-search: '$1' is not installed (apt install $2). Ask the user to install it; do not fall back to find / or grep -r /." >&2
+  exit 3
+}
+
+index_age() {
+  # db is root:plocate 0640; plocate is setgid so queries work, but only stat() is readable here
+  [ -e "$INDEX_DB" ] || { echo "index: MISSING (run: sudo updatedb)"; return; }
+  local mtime now mins
+  mtime=$(stat -c %Y "$INDEX_DB"); now=$(date +%s); mins=$(( (now - mtime) / 60 ))
+  if [ "$mins" -lt 120 ]; then echo "index age: ${mins}m"; else echo "index age: $(( mins / 60 ))h (files newer than this are not indexed)"; fi
+}
+
+# run_capped <timeout_s> <cmd...>  — runs the command, caps output at $LIMIT lines,
+# prints a footer with hit count / elapsed / truncation. Sets HITS, RC.
+run_capped() {
+  local t="$1"; shift
+  local tmp; tmp=$(mktemp)
+  local start end
+  start=$(date +%s.%N)
+  timeout --signal=TERM --kill-after=5 "$t" "$@" >"$tmp" 2>/dev/null
+  RC=$?
+  end=$(date +%s.%N)
+  HITS=$(wc -l <"$tmp")
+  head -n "$LIMIT" "$tmp"
+  rm -f "$tmp"
+  ELAPSED=$(printf '%.2f' "$(echo "$end - $start" | bc)")
+  local trunc=""
+  [ "$HITS" -gt "$LIMIT" ] && trunc=" (showing first $LIMIT — narrow the pattern or DIR)"
+  if [ "$RC" -eq 124 ]; then
+    echo "-- TIMED OUT after ${t}s with $HITS hits so far$trunc. Narrow DIR or the pattern." >&2
+  else
+    echo "-- $HITS hits in ${ELAPSED}s$trunc"
+  fi
+}
+
+[ $# -ge 1 ] || usage 1
+verb="$1"; shift
+
+case "$verb" in
+  -h|--help|help) usage 0 ;;
+
+  file)
+    need plocate plocate
+    FD=$(command -v fd || command -v fdfind) || need fd fd-find   # Ubuntu ships it as fdfind
+    pattern=""; dir=""; limit=$LIMIT
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        --in) dir="$2"; shift 2 ;;
+        --limit) limit="$2"; shift 2 ;;
+        -*) echo "unknown flag $1" >&2; usage 1 ;;
+        *) pattern="$1"; shift ;;
+      esac
+    done
+    [ -n "$pattern" ] || { echo "file: need a name pattern" >&2; usage 1; }
+    LIMIT=$limit
+    # basename match unless the pattern carries a path component
+    if [[ "$pattern" == */* ]]; then bflag=""; else bflag="-b"; fi
+    if [ -n "$dir" ]; then
+      dir=$(readlink -f "$dir")
+      run_capped "$FILE_TIMEOUT" bash -c 'plocate -i '"$bflag"' --limit '"$((limit+1))"' -- "$1" | grep -F -- "$2/"' _ "$pattern" "$dir"
+    else
+      run_capped "$FILE_TIMEOUT" plocate -i $bflag --limit "$((limit+1))" -- "$pattern"
+    fi
+    if [ "$HITS" -eq 0 ]; then
+      scope="${dir:-$PWD}"
+      echo "-- not in the index; live fd scan of $scope (${FILE_TIMEOUT}s cap)…"
+      run_capped "$FILE_TIMEOUT" "$FD" -H -I --exclude .git --glob "*${pattern}*" "$scope"
+    fi
+    index_age
+    ;;
+
+  text)
+    need rg ripgrep
+    pattern=""; dir=""; all=0; noignore=""
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        --all) all=1; shift ;;
+        --no-ignore) noignore="--no-ignore"; shift ;;
+        -*) echo "unknown flag $1" >&2; usage 1 ;;
+        *) if [ -z "$pattern" ]; then pattern="$1"; else dir="$1"; fi; shift ;;
+      esac
+    done
+    [ -n "$pattern" ] || { echo "text: need a regex" >&2; usage 1; }
+    t=$TEXT_TIMEOUT
+    if [ "$all" -eq 1 ]; then dir="$HOME"; t=$ALL_TIMEOUT; fi
+    dir=$(readlink -f "${dir:-$PWD}")
+    if [ "$dir" = "/" ]; then
+      echo "pulsar-search: refusing to text-search '/'. Use 'pulsar-search file <name>' (indexed) to locate the file, then scope text search to its directory. '--all' searches \$HOME." >&2
+      exit 2
+    fi
+    run_capped "$t" rg -n -S --no-heading --color never --hidden $noignore \
+      --max-filesize 1M --max-columns 300 --max-columns-preview \
+      -g '!.git/' -g '!node_modules/' -g '!__pycache__/' -g '!.venv/' -g '!venv/' \
+      -g '!*.db' -g '!*.sqlite*' -g '!*.log' -g '!*.jsonl' -g '!*.min.js' -g '!*.map' \
+      -e "$pattern" -- "$dir"
+    ;;
+
+  *) echo "unknown verb '$verb'" >&2; usage 1 ;;
+esac

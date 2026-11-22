@@ -1,0 +1,22 @@
+[Unit]
+Description=Pulsar web UI (localhost SvelteKit server)
+After=network.target pulsar-daemon.service
+Wants=pulsar-daemon.service
+
+[Service]
+Type=simple
+WorkingDirectory=@REPO_DIR@/web
+Environment=PORT=@WEB_PORT@
+Environment=PULSAR_DAEMON_PORT=@DAEMON_PORT@
+Environment="PATH=@SERVICE_PATH_QUOTED@"
+EnvironmentFile=-@CONFIG_DIR@/pulsar.env
+ExecStartPre="@REPO_DIR_QUOTED@/web/scripts/build-live.sh"
+ExecStart="@NODE_BIN_QUOTED@" "@REPO_DIR_QUOTED@/web/server.js"
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pulsar-web
+
+[Install]
+WantedBy=default.target

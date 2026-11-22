@@ -1,0 +1,7 @@
+[Unit]
+Description=Aggregate resource fence for Pulsar pulses and background jobs
+
+[Slice]
+MemoryHigh=80%
+MemoryMax=90%
+TasksMax=4096

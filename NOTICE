@@ -1,0 +1,18 @@
+Pulsar
+Original author: Chuck Kile
+Credit: Adapt AI Systems and Adapt Digital Solutions
+
+This product is licensed under the GNU Affero General Public License v3.0 (see LICENSE).
+
+Third-party components
+----------------------
+
+@mariozechner/pi-coding-agent (used by addons/pi-tuned)
+Author: Mario Zechner
+License: MIT
+Source: https://github.com/badlogic/pi-mono
+
+OpenAI Codex (system prompt text in pulsar/vessel/ds4-models.json)
+Copyright 2025 OpenAI
+License: Apache-2.0
+Source: https://github.com/openai/codex

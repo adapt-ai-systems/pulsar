@@ -1,0 +1,16 @@
+{
+  "name": "pulsar-pi-tuned",
+  "version": "1.0.0",
+  "description": "Tuned @mariozechner/pi-coding-agent bundle for Pulsar",
+  "private": true,
+  "scripts": {
+    "postinstall": "python3 patches/bash-description.py && python3 patches/glm-thinking-effort.py && python3 patches/max-tokens-clamp.py && python3 patches/context-fit-max-tokens.py",
+    "check-patches": "python3 patches/bash-description.py check && python3 patches/glm-thinking-effort.py check && python3 patches/max-tokens-clamp.py check && python3 patches/context-fit-max-tokens.py check",
+    "test": "python3 -m unittest discover -s patches -p 'test_*.py' -v"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@mariozechner/pi-coding-agent": "0.73.1"
+  }
+}
