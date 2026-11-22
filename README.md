@@ -4,15 +4,27 @@ Pulsar is a single-user Linux daemon and web interface for running multiple codi
 
 Each pulse runs inside its own fenced transient `systemd --user` service (`pulsar-pulse-<id>.service` under `pulsar.slice`) with a per-pulse home directory, append-only event log, and SQLite state store. Restarting the daemon reconciles running pulses without killing them.
 
+## Recommended setup: host on your Tailscale tailnet & install as an app
+
+The recommended way to run Pulsar is on **one Linux machine** (workstation, home/office server, GPU box, or Linux VM) exposed privately on your **Tailscale tailnet** with `tailscale serve`.
+
+- **Reachable from any machine on Tailscale:** open `https://<your-machine>.<your-tailnet>:5292/` from Mac, Windows, Linux, iPhone, or Android with automatic HTTPS and zero open public ports.
+- **Install as a standalone app (PWA):**
+  - **Mac & Windows (Chrome / Edge / Brave):** open your tailnet URL and click the **Install** icon in the address bar (or `⋮ → Cast, save, and share → Install page as app`) to pin it to your Dock or Taskbar.
+  - **iPhone & iPad (Safari):** open your tailnet URL and tap **Share → Add to Home Screen**.
+  - **Android (Chrome):** open your tailnet URL and tap `⋮ → Install app` (or **Add to Home screen**).
+
+Full step-by-step instructions: [docs/setup/tailscale.md](docs/setup/tailscale.md).
+
 ## Install with an AI agent
 
 The easiest way to install Pulsar is to let an AI agent do it with you. Open Claude Code, Codex, or another coding agent on the Linux machine and give it this message:
 
 ```text
-Read https://raw.githubusercontent.com/adapt-ai-systems/pulsar/main/AGENT_INSTALL.md and follow it to install Pulsar on this machine. Take me through it step by step.
+Read https://raw.githubusercontent.com/adapt-ai-systems/pulsar/main/AGENT_INSTALL.md and follow it to install Pulsar on this machine and host it privately on my Tailscale tailnet so I can install it as an app on Mac, Windows, iPhone, and Android. Take me through it step by step.
 ```
 
-The agent follows [AGENT_INSTALL.md](AGENT_INSTALL.md): it checks the machine, asks before it uses `sudo`, installs Pulsar, helps you set up one agent tool, and proves that a first pulse answers. It never asks for a password or an API key in the chat.
+The agent follows [AGENT_INSTALL.md](AGENT_INSTALL.md): it checks the machine, asks before it uses `sudo`, installs Pulsar, helps you set up one agent tool, proves that a first pulse answers, and walks you through Tailscale Serve hosting so every device on your tailnet can install it as an app. It never asks for a password or an API key in the chat.
 
 No agent on that machine? Paste the contents of [AGENT_INSTALL.md](AGENT_INSTALL.md) into a chat assistant (for example the Claude app). It gives you one command at a time and reads the output that you paste back.
 
@@ -138,6 +150,20 @@ On a headless Linux machine or VM, enable systemd user lingering so Pulsar stays
 ```bash
 loginctl enable-linger "$USER"
 ```
+
+### Recommended: host on your Tailscale tailnet
+
+To make Pulsar reachable over HTTPS from every machine on your tailnet and installable as a Chrome / home-screen app on Mac, Windows, iPhone, and Android:
+
+```bash
+# Replace <your-machine>.<your-tailnet> with your MagicDNS name from `tailscale status`
+echo "PULSAR_WEB_ALLOWED_HOSTS=<your-machine>.<your-tailnet>" >> "$HOME/.config/pulsar/pulsar.env"
+systemctl --user restart pulsar-daemon.service pulsar-web.service
+tailscale serve --bg --https=5292 http://127.0.0.1:5292
+loginctl enable-linger "$USER"
+```
+
+See [docs/setup/tailscale.md](docs/setup/tailscale.md) for MagicDNS/HTTPS setup and Mac, Windows, iPhone, and Android app install steps.
 
 If `~/.local/bin` is not yet on your `PATH`, add `export PATH="$HOME/.local/bin:$PATH"` to your shell profile.
 

@@ -32,7 +32,7 @@ Tell the user this, in your own words, before you run a command:
 3. Download and install Pulsar.
 4. Set up one agent tool (Claude Code, Codex, pi, Antigravity, or Grok).
 5. Start a first pulse and prove that it answers.
-6. Optional: keep Pulsar running after logout, set a name, set up phone access.
+6. **Recommended:** host privately on your Tailscale tailnet (`tailscale serve` + `PULSAR_WEB_ALLOWED_HOSTS` + linger) so it is reachable from any machine on Tailscale and installable as a Chrome / home-screen app on Mac, Windows, iPhone, or Android; optionally set the user's name.
 
 ## Step 1 — Check the machine
 
@@ -225,17 +225,21 @@ If the machine has no screen (a server that the user reaches with SSH), the user
 ssh -L 5292:127.0.0.1:5292 <user>@<machine>
 ```
 
-## Step 6 — Optional items
+## Step 6 — Recommended: host on your Tailscale tailnet & install as an app
 
-Ask the user about these one at a time. Each one is optional.
+The recommended setup is hosting Pulsar privately on the user's Tailscale tailnet so it is reachable from any machine on Tailscale and can be installed as a standalone app on Mac, Windows, iPhone, or Android. Ask the user about these items one at a time:
 
-1. **Keep Pulsar running after logout** (for a server or a virtual machine): `loginctl enable-linger "$USER"`. If it prints `Access denied`, do the check first; if the check does not pass, ask the user and then run `sudo loginctl enable-linger "$USER"`. Check: `loginctl show-user "$USER" --property=Linger` prints `Linger=yes`.
-2. **The name that pulses use for the user** (the default is "the user"):
+1. **Host on Tailscale (recommended):** follow `docs/setup/tailscale.md` in the Pulsar folder step by step (`PULSAR_WEB_ALLOWED_HOSTS`, `systemctl --user restart pulsar-daemon.service pulsar-web.service`, and `tailscale serve --bg --https=5292 http://127.0.0.1:5292`). Then give the user their HTTPS tailnet URL and tell them how to install it as an app:
+   - **Mac & Windows (Chrome / Edge / Brave):** click **Install** in the address bar (or `⋮ → Cast, save, and share → Install page as app`).
+   - **iPhone & iPad (Safari):** tap **Share → Add to Home Screen**.
+   - **Android (Chrome):** tap `⋮ → Install app` (or **Add to Home screen**).
+   See rule 5: never expose Pulsar outside Tailscale.
+2. **Keep Pulsar running after logout** (recommended for any Tailscale host, server, or VM): `loginctl enable-linger "$USER"`. If it prints `Access denied`, do the check first; if the check does not pass, ask the user and then run `sudo loginctl enable-linger "$USER"`. Check: `loginctl show-user "$USER" --property=Linger` prints `Linger=yes`.
+3. **The name that pulses use for the user** (optional; default is "the user"):
 
    ```bash
    curl -s -X PUT http://127.0.0.1:8726/settings/owner.name -H 'Content-Type: application/json' -d '"<name>"'
    ```
-3. **Phone or remote access:** use Tailscale only. Follow `docs/setup/tailscale.md` in the Pulsar folder step by step. See rule 5.
 
 ## End — give the user a short report
 
